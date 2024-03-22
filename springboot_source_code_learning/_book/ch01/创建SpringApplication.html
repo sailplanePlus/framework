@@ -1,0 +1,442 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>2.创建SpringApplication · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="什么是SpringApplication.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    一、关于SpringApplication
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="什么是SpringApplication.html">
+            
+                <a href="什么是SpringApplication.html">
+            
+                    
+                    1.什么是SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="创建SpringApplication.html">
+            
+                <a href="创建SpringApplication.html">
+            
+                    
+                    2.创建SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    二、接口详解
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../interface/BootstrapRegistryInitializer.html">
+            
+                <a href="../interface/BootstrapRegistryInitializer.html">
+            
+                    
+                    1.BootstrapRegistryInitializer接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >2.创建SpringApplication</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x521B;&#x5EFA;springapplication">&#x521B;&#x5EFA;SpringApplication</h1>
+<h2 id="&#x8C03;&#x7528;springapplication&#x4E2D;&#x7684;&#x9759;&#x6001;run&#x65B9;&#x6CD5;">&#x8C03;&#x7528;SpringApplication&#x4E2D;&#x7684;&#x9759;&#x6001;run&#x65B9;&#x6CD5;</h2>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ConfigurableApplicationContext <span class="hljs-title">run</span><span class="hljs-params">(Class&lt;?&gt; primarySource, String... args)</span> </span>{
+        <span class="hljs-keyword">return</span> run(<span class="hljs-keyword">new</span> Class&lt;?&gt;[] { primarySource }, args);
+}
+</code></pre>
+<h2 id="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;springapplication&#x5B9E;&#x4F8B;&#x3002;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E0A;&#x4E0B;&#x6587;&#x5C06;&#x4ECE;&#x6307;&#x5B9A;&#x7684;&#x4E3B;&#x6E90;&#x52A0;&#x8F7D;bean&#x3002;&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x662F;&#x8C03;&#x7528;runstring&#x4E4B;&#x524D;&#x81EA;&#x5B9A;&#x4E49;&#x3002;">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;SpringApplication&#x5B9E;&#x4F8B;&#x3002;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E0A;&#x4E0B;&#x6587;&#x5C06;&#x4ECE;&#x6307;&#x5B9A;&#x7684;&#x4E3B;&#x6E90;&#x52A0;&#x8F7D;bean&#x3002;&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x662F;&#x8C03;&#x7528;run(String...)&#x4E4B;&#x524D;&#x81EA;&#x5B9A;&#x4E49;&#x3002;</h2>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SpringApplication</span><span class="hljs-params">(ResourceLoader resourceLoader, 
+    Class&lt;?&gt;... primarySources)</span> </span>{
+        <span class="hljs-keyword">this</span>.resourceLoader = resourceLoader;
+        Assert.notNull(primarySources, <span class="hljs-string">&quot;PrimarySources must not be null&quot;</span>);
+        <span class="hljs-keyword">this</span>.primarySources = <span class="hljs-keyword">new</span>
+          LinkedHashSet&lt;&gt;(Arrays.asList(primarySources));
+        <span class="hljs-keyword">this</span>.webApplicationType = WebApplicationType.deduceFromClasspath();
+        <span class="hljs-keyword">this</span>.bootstrapRegistryInitializers = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(
+                getSpringFactoriesInstances(BootstrapRegistryInitializer.class));
+      setInitializers((Collection)
+        getSpringFactoriesInstances(ApplicationContextInitializer.class));
+      setListeners((Collection)
+        getSpringFactoriesInstances(ApplicationListener.class));
+        <span class="hljs-keyword">this</span>.mainApplicationClass = deduceMainApplicationClass();
+}
+</code></pre>
+<ol>
+<li>&#x8BBE;&#x7F6E;&#x8D44;&#x6E90;&#x52A0;&#x8F7D;&#x5668;resourceLoader<pre><code class="lang-java"> <span class="hljs-keyword">this</span>.resourceLoader = resourceLoader;
+</code></pre>
+</li>
+<li>&#x5C06;&#x542F;&#x52A8;&#x7C7B;&#x653E;&#x5165;primarySources<pre><code class="lang-java"> Assert.notNull(primarySources, <span class="hljs-string">&quot;PrimarySources must not be null&quot;</span>);
+ <span class="hljs-keyword">this</span>.primarySources = <span class="hljs-keyword">new</span> LinkedHashSet&lt;&gt;(Arrays.asList(primarySources));
+</code></pre>
+</li>
+<li>&#x63A8;&#x6D4B;web&#x5E94;&#x7528;&#x7C7B;&#x578B;webApplicationType (NONE&#x3001;REACTIVE&#x3001;SERVLET)<pre><code class="lang-java"> <span class="hljs-keyword">this</span>.webApplicationType = WebApplicationType.deduceFromClasspath();
+</code></pre>
+</li>
+<li>&#x4ECE;spring.factories&#x4E2D;&#x83B7;&#x53D6;<a href="../interface/BootstrapRegistryInitializer.html">BootStrapRegistryInitializer</a><pre><code class="lang-java"> <span class="hljs-keyword">this</span>.bootstrapRegistryInitializers = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(
+             getSpringFactoriesInstances(BootstrapRegistryInitializer.class));
+</code></pre>
+</li>
+<li>&#x4ECE;spring.factories&#x4E2D;&#x83B7;&#x53D6;ApplicationContextInitializer&#xFF08;&#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E0A;&#x4E0B;&#x6587;&#x521D;&#x59CB;&#x5316;&#x4E4B;&#x524D;&#x6267;&#x884C;&#x4E00;&#x4E9B;&#x81EA;&#x5B9A;&#x4E49;&#x903B;&#x8F91;&#xFF09;<pre><code class="lang-java"> setInitializers((Collection)
+     getSpringFactoriesInstances(ApplicationContextInitializer.class));
+</code></pre>
+</li>
+<li>&#x4ECE;spring.factories&#x4E2D;&#x83B7;&#x53D6;ApplicationListener<pre><code class="lang-java"> setListeners((Collection)
+     getSpringFactoriesInstances(ApplicationListener.class));
+</code></pre>
+</li>
+<li>&#x63A8;&#x6D4B;&#x51FA;main&#x7C7B;&#xFF08;main()&#x65B9;&#x6CD5;&#x6240;&#x5728;&#x7684;&#x7C7B;&#xFF09;<pre><code class="lang-java"> <span class="hljs-keyword">this</span>.mainApplicationClass = deduceMainApplicationClass();
+</code></pre>
+</li>
+</ol>
+<h3 id="&#x5173;&#x4E8E;&#x65B9;&#x6CD5;-getspringfactoriesinstancesclass-type-&#x7684;&#x89E3;&#x91CA;">&#x5173;&#x4E8E;&#x65B9;&#x6CD5; getSpringFactoriesInstances(Class<t> type) &#x7684;&#x89E3;&#x91CA;</t></h3>
+<pre><code class="lang-java"><span class="hljs-keyword">private</span> &lt;T&gt; <span class="hljs-function">Collection&lt;T&gt; <span class="hljs-title">getSpringFactoriesInstances</span><span class="hljs-params">(Class&lt;T&gt; type, 
+    Class&lt;?&gt;[] parameterTypes, Object... args)</span> </span>{
+        ClassLoader classLoader = getClassLoader();
+        <span class="hljs-comment">// Use names and ensure unique to protect against duplicates</span>
+        Set&lt;String&gt; names = <span class="hljs-keyword">new</span> LinkedHashSet&lt;&gt;(
+           SpringFactoriesLoader.loadFactoryNames(type,classLoader));
+        List&lt;T&gt; instances = createSpringFactoriesInstances
+          (type, parameterTypes, classLoader, args, names);
+        AnnotationAwareOrderComparator.sort(instances);
+        <span class="hljs-keyword">return</span> instances;
+    }
+</code></pre>
+<h4 id="&#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;&#xFF0C;&#x4ECE;meta-infspringfactories&#x52A0;&#x8F7D;&#x7ED9;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x5DE5;&#x5382;&#x5B9E;&#x73B0;&#x7684;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;">&#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;&#xFF0C;&#x4ECE;&quot;META-INF/spring.factories&quot;&#x52A0;&#x8F7D;&#x7ED9;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x5DE5;&#x5382;&#x5B9E;&#x73B0;&#x7684;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;</h4>
+<pre><code class="lang-java">    Set&lt;String&gt; names = <span class="hljs-keyword">new</span> LinkedHashSet&lt;&gt;(
+        SpringFactoriesLoader.loadFactoryNames(type, classLoader));
+    <span class="hljs-comment">//&#x83B7;&#x53D6;&#x7ED9;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;String&gt; <span class="hljs-title">loadFactoryNames</span><span class="hljs-params">(Class&lt;?&gt;factoryType,
+        @Nullable ClassLoader classLoader)</span> </span>{
+        ClassLoader classLoaderToUse = classLoader;
+        <span class="hljs-keyword">if</span> (classLoaderToUse == <span class="hljs-keyword">null</span>) {
+            classLoaderToUse = SpringFactoriesLoader.class.getClassLoader();
+        }
+        String factoryTypeName = factoryType.getName();
+        <span class="hljs-keyword">return</span> loadSpringFactories(classLoaderToUse)
+          .getOrDefault(factoryTypeName, Collections.emptyList());
+    }
+    <span class="hljs-comment">//&#x9996;&#x5148;&#x4ECE;cache&#x4E2D;&#x83B7;&#x53D6;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5219;&#x904D;&#x5386;spring.factories&#x914D;&#x7F6E;&#xFF0C;&#x83B7;&#x53D6;&#x7ED9;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;&#xFF0C;&#x5E76;&#x6DFB;&#x52A0;&#x5230;cache</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Map&lt;String, List&lt;String&gt;&gt; loadSpringFactories(ClassLoader classLoader) {
+        Map&lt;String, List&lt;String&gt;&gt; result = cache.get(classLoader);
+        <span class="hljs-keyword">if</span> (result != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">return</span> result;
+        }
+
+        result = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+        <span class="hljs-keyword">try</span> {
+            Enumeration&lt;URL&gt; urls = classLoader.
+             getResources(FACTORIES_RESOURCE_LOCATION);
+            <span class="hljs-keyword">while</span> (urls.hasMoreElements()) {
+                URL url = urls.nextElement();
+                UrlResource resource = <span class="hljs-keyword">new</span> UrlResource(url);
+                Properties properties = PropertiesLoaderUtils
+                    .loadProperties(resource);
+                <span class="hljs-keyword">for</span> (Map.Entry&lt;?, ?&gt; entry : properties.entrySet()) {
+                    String factoryTypeName = ((String) entry.getKey()).trim();
+                    String[] factoryImplementationNames = StringUtils
+                            .commaDelimitedListToStringArray((String) entry.getValue());
+                    <span class="hljs-keyword">for</span> (String factoryImplementationName : factoryImplementationNames) {
+                        result.computeIfAbsent(factoryTypeName, key -&gt; <span class="hljs-keyword">new</span> ArrayList&lt;&gt;())
+                                .add(factoryImplementationName.trim());
+                    }
+                }
+            }
+
+            <span class="hljs-comment">// Replace all lists with unmodifiable lists containing unique elements</span>
+            result.replaceAll((factoryType, implementations) -&gt; implementations.stream().distinct()
+                    .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList)));
+            cache.put(classLoader, result);
+        }
+        <span class="hljs-keyword">catch</span> (IOException ex) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Unable to load factories from location [&quot;</span> +
+                    FACTORIES_RESOURCE_LOCATION + <span class="hljs-string">&quot;]&quot;</span>, ex);
+        }
+        <span class="hljs-keyword">return</span> result;
+    }
+</code></pre>
+<h4 id="&#x83B7;&#x53D6;&#x5230;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;&#x540E;&#xFF0C;&#x4F7F;&#x7528;&#x53CD;&#x5C04;&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;">&#x83B7;&#x53D6;&#x5230;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;&#x540E;&#xFF0C;&#x4F7F;&#x7528;&#x53CD;&#x5C04;&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;</h4>
+<pre><code class="lang-java"><span class="hljs-keyword">private</span> &lt;T&gt; <span class="hljs-function">List&lt;T&gt; <span class="hljs-title">createSpringFactoriesInstances</span><span class="hljs-params">(Class&lt;T&gt; type, Class&lt;?&gt;[] parameterTypes,
+            ClassLoader classLoader, Object[] args, Set&lt;String&gt; names)</span> </span>{
+        List&lt;T&gt; instances = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(names.size());
+        <span class="hljs-keyword">for</span> (String name : names) {
+            <span class="hljs-keyword">try</span> {
+                Class&lt;?&gt; instanceClass = ClassUtils.forName(name, classLoader);
+                Assert.isAssignable(type, instanceClass);
+                Constructor&lt;?&gt; constructor = instanceClass.getDeclaredConstructor(parameterTypes);
+                T instance = (T) BeanUtils.instantiateClass(constructor, args);
+                instances.add(instance);
+            }
+            <span class="hljs-keyword">catch</span> (Throwable ex) {
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Cannot instantiate &quot;</span> + type + <span class="hljs-string">&quot; : &quot;</span> + name, ex);
+            }
+        }
+        <span class="hljs-keyword">return</span> instances;
+    }
+</code></pre>
+<h4 id="&#x5C06;&#x521B;&#x5EFA;&#x7684;&#x5B9E;&#x4F8B;&#x8FDB;&#x884C;&#x6392;&#x5E8F;">&#x5C06;&#x521B;&#x5EFA;&#x7684;&#x5B9E;&#x4F8B;&#x8FDB;&#x884C;&#x6392;&#x5E8F;</h4>
+<pre><code class="lang-java">AnnotationAwareOrderComparator.sort(instances);
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="什么是SpringApplication.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 1.什么是SpringApplication">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"2.创建SpringApplication","level":"1.2.2","depth":2,"next":{"title":"二、接口详解","level":"1.3","depth":1,"ref":"","articles":[{"title":"1.BootstrapRegistryInitializer接口详解","level":"1.3.1","depth":2,"path":"interface/BootstrapRegistryInitializer.md","ref":"interface/BootstrapRegistryInitializer.md","articles":[]}]},"previous":{"title":"1.什么是SpringApplication","level":"1.2.1","depth":2,"path":"ch01/什么是SpringApplication.md","ref":"ch01/什么是SpringApplication.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch01/创建SpringApplication.md","mtime":"2024-03-22T03:50:59.292Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-22T10:35:25.239Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

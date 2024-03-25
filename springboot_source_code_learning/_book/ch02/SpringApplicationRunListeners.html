@@ -1,0 +1,429 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>3.获取SpringApplicationRunListeners · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="systemProperty.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    一、关于SpringApplication
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch01/什么是SpringApplication.html">
+            
+                <a href="../ch01/什么是SpringApplication.html">
+            
+                    
+                    1.什么是SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch01/创建SpringApplication.html">
+            
+                <a href="../ch01/创建SpringApplication.html">
+            
+                    
+                    2.创建SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="run.html">
+            
+                <a href="run.html">
+            
+                    
+                    二、运行SpringApplication
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="DefaultBootstrapContext.html">
+            
+                <a href="DefaultBootstrapContext.html">
+            
+                    
+                    1.创建引导上下文DefaultBootstrapContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="systemProperty.html">
+            
+                <a href="systemProperty.html">
+            
+                    
+                    2.设置系统属性java.awt.headless
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="SpringApplicationRunListeners.html">
+            
+                <a href="SpringApplicationRunListeners.html">
+            
+                    
+                    3.获取SpringApplicationRunListeners
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    三、接口详解
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../interface/BootstrapRegistryInitializer.html">
+            
+                <a href="../interface/BootstrapRegistryInitializer.html">
+            
+                    
+                    1.BootstrapRegistryInitializer接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../interface/BootstrapContext.html">
+            
+                <a href="../interface/BootstrapContext.html">
+            
+                    
+                    2.BootstrapContext接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../interface/BootstrapRegistry.md">
+            
+                <span>
+            
+                    
+                    3.BootstrapRegistry接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >3.获取SpringApplicationRunListeners</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x83B7;&#x53D6;springapplicationrunlisteners">&#x83B7;&#x53D6;SpringApplicationRunListeners</h1>
+<p>&#x6E90;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> SpringApplicationRunListeners <span class="hljs-title">getRunListeners</span><span class="hljs-params">(String[] args)</span> </span>{
+        Class&lt;?&gt;[] types = <span class="hljs-keyword">new</span> Class&lt;?&gt;[] { SpringApplication.class, String[].class };
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SpringApplicationRunListeners(logger,
+                getSpringFactoriesInstances(SpringApplicationRunListener.class, types, <span class="hljs-keyword">this</span>, args),
+                <span class="hljs-keyword">this</span>.applicationStartup);
+    }
+</code></pre>
+<h3 id="&#x4E00;&#x3001;&#x4ECE;meta-infspringfactories&#x4E2D;&#x52A0;&#x8F7D;springapplicationrunlistener&#x7684;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x53CD;&#x5C04;&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x6392;&#x5E8F;&#x3002;">&#x4E00;&#x3001;&#x4ECE;&quot;META-INF/spring.factories&quot;&#x4E2D;&#x52A0;&#x8F7D;SpringApplicationRunListener&#x7684;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x53CD;&#x5C04;&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x6392;&#x5E8F;&#x3002;</h3>
+<pre><code class="lang-java">getSpringFactoriesInstances(SpringApplicationRunListener.class, types, <span class="hljs-keyword">this</span>, args)
+</code></pre>
+<pre><code class="lang-java"># Run Listeners
+org.springframework.boot.SpringApplicationRunListener=\
+org.springframework.boot.context.event.EventPublishingRunListener
+</code></pre>
+<h3 id="&#x4E8C;&#x3001;&#x8FD9;&#x91CC;&#x7740;&#x91CD;&#x8BB2;&#x4E00;&#x4E0B;eventpublishingrunlistener&#x7684;&#x5B9E;&#x4F8B;&#x8FC7;&#x7A0B;">&#x4E8C;&#x3001;&#x8FD9;&#x91CC;&#x7740;&#x91CD;&#x8BB2;&#x4E00;&#x4E0B;EventPublishingRunListener&#x7684;&#x5B9E;&#x4F8B;&#x8FC7;&#x7A0B;</h3>
+<p>&#x5728;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#xFF0C;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x5E94;&#x7528;&#x4E8B;&#x4EF6;&#x591A;&#x64AD;&#x5668;SimpleApplicationEventMulticaster</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">EventPublishingRunListener</span><span class="hljs-params">(SpringApplication application, String[] args)</span> </span>{
+        <span class="hljs-keyword">this</span>.application = application;
+        <span class="hljs-keyword">this</span>.args = args;
+        <span class="hljs-keyword">this</span>.initialMulticaster = <span class="hljs-keyword">new</span> SimpleApplicationEventMulticaster();
+        <span class="hljs-keyword">for</span> (ApplicationListener&lt;?&gt; listener : application.getListeners()) {
+            <span class="hljs-keyword">this</span>.initialMulticaster.addApplicationListener(listener);
+        }
+    }
+</code></pre>
+<p>&#x5C06;SpringApplication&#x4E2D;&#x6240;&#x6709;&#x7684;ApplicationListener&#x6DFB;&#x52A0;&#x5230;org.springframework.context.event.AbstractApplicationEventMulticaster.DefaultListenerRetriever#applicationListeners&#x96C6;&#x5408;&#x4E2D;</p>
+<pre><code class="lang-java"><span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addApplicationListener</span><span class="hljs-params">(ApplicationListener&lt;?&gt; listener)</span> </span>{
+        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>.defaultRetriever) {
+            <span class="hljs-comment">// &#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x6CE8;&#x518C;&#x4E86;&#x4EE3;&#x7406;&#x7684;&#x76EE;&#x6807;&#xFF0C;&#x53EF;&#x4EE5;&#x663E;&#x5F0F;&#x5730;&#x5C06;&#x5176;&#x79FB;&#x9664;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x540C;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#x5668;&#x7684;&#x53CC;&#x91CD;&#x8C03;&#x7528;&#x3002;</span>
+            Object singletonTarget = AopProxyUtils.getSingletonTarget(listener);
+            <span class="hljs-keyword">if</span> (singletonTarget <span class="hljs-keyword">instanceof</span> ApplicationListener) {
+                <span class="hljs-keyword">this</span>.defaultRetriever.applicationListeners.remove(singletonTarget);
+            }
+            <span class="hljs-keyword">this</span>.defaultRetriever.applicationListeners.add(listener);
+            <span class="hljs-keyword">this</span>.retrieverCache.clear();
+        }
+    }
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="systemProperty.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 2.设置系统属性java.awt.headless">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"3.获取SpringApplicationRunListeners","level":"1.3.3","depth":2,"next":{"title":"三、接口详解","level":"1.4","depth":1,"ref":"","articles":[{"title":"1.BootstrapRegistryInitializer接口详解","level":"1.4.1","depth":2,"path":"interface/BootstrapRegistryInitializer.md","ref":"interface/BootstrapRegistryInitializer.md","articles":[]},{"title":"2.BootstrapContext接口详解","level":"1.4.2","depth":2,"path":"interface/BootstrapContext.md","ref":"interface/BootstrapContext.md","articles":[]},{"title":"3.BootstrapRegistry接口详解","level":"1.4.3","depth":2,"path":"interface/BootstrapRegistry.md","ref":"interface/BootstrapRegistry.md","articles":[]}]},"previous":{"title":"2.设置系统属性java.awt.headless","level":"1.3.2","depth":2,"path":"ch02/systemProperty.md","ref":"ch02/systemProperty.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch02/SpringApplicationRunListeners.md","mtime":"2024-03-25T11:14:06.701Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-25T11:15:07.370Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

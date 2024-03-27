@@ -17,6 +17,7 @@ public ConfigurableApplicationContext run(String... args) {
 		  * EventPublishingRunListener
 		*/
 		SpringApplicationRunListeners listeners = getRunListeners(args);
+		//4.事件发布：ApplicationStartingEvent
 		listeners.starting(bootstrapContext, this.mainApplicationClass);
 		try {
 			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);

@@ -1,0 +1,633 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>4.事件发布：ApplicationStartingEvent · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="SpringApplicationRunListeners.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    一、关于SpringApplication
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch01/什么是SpringApplication.html">
+            
+                <a href="../ch01/什么是SpringApplication.html">
+            
+                    
+                    1.什么是SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch01/创建SpringApplication.html">
+            
+                <a href="../ch01/创建SpringApplication.html">
+            
+                    
+                    2.创建SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="run.html">
+            
+                <a href="run.html">
+            
+                    
+                    二、运行SpringApplication
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="DefaultBootstrapContext.html">
+            
+                <a href="DefaultBootstrapContext.html">
+            
+                    
+                    1.创建引导上下文DefaultBootstrapContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="systemProperty.html">
+            
+                <a href="systemProperty.html">
+            
+                    
+                    2.设置系统属性java.awt.headless
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="SpringApplicationRunListeners.html">
+            
+                <a href="SpringApplicationRunListeners.html">
+            
+                    
+                    3.获取SpringApplicationRunListeners
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.4" data-path="ApplicationStartingEvent.html">
+            
+                <a href="ApplicationStartingEvent.html">
+            
+                    
+                    4.事件发布：ApplicationStartingEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    三、接口详解
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../interface/BootstrapRegistryInitializer.html">
+            
+                <a href="../interface/BootstrapRegistryInitializer.html">
+            
+                    
+                    1.BootstrapRegistryInitializer接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../interface/BootstrapContext.html">
+            
+                <a href="../interface/BootstrapContext.html">
+            
+                    
+                    2.BootstrapContext接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../interface/BootstrapRegistry.md">
+            
+                <span>
+            
+                    
+                    3.BootstrapRegistry接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >4.事件发布：ApplicationStartingEvent</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#xFF1A;applicationstartingevent">&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#xFF1A;ApplicationStartingEvent</h1>
+<h3 id="&#x5B98;&#x65B9;&#x89E3;&#x8BFB;&#xFF1A;">&#x5B98;&#x65B9;&#x89E3;&#x8BFB;&#xFF1A;</h3>
+<blockquote>
+<p>&#x4E8B;&#x4EF6;&#x5728;SpringApplication&#x542F;&#x52A8;&#x540E;&#xFF0C;&#x5728;Environment&#x6216;ApplicationContext&#x53EF;&#x7528;&#x4E4B;&#x524D;&#xFF0C;&#x5C3D;&#x53EF;&#x80FD;&#x65E9;&#x7684;&#x53D1;&#x5E03;&#xFF0C;&#x4F46;&#x5728;ApplicationListeners&#x6CE8;&#x518C;&#x4E4B;&#x540E;&#x3002;
+&#x4E8B;&#x4EF6;&#x7684;&#x6E90;&#x662F;SpringApplication&#x672C;&#x8EAB;&#xFF0C;&#x4F46;&#x662F;&#x8981;&#x6CE8;&#x610F;&#x5728;&#x65E9;&#x671F;&#x9636;&#x6BB5;&#x4E0D;&#x8981;&#x8FC7;&#x591A;&#x7684;&#x4F7F;&#x7528;&#x5B83;&#x7684;&#x5185;&#x90E8;&#x72B6;&#x6001;&#xFF0C;&#x56E0;&#x4E3A;&#x53EF;&#x80FD;&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x540E;&#x671F;&#x88AB;&#x4FEE;&#x6539;&#x3002;</p>
+</blockquote>
+<h3 id="&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#x7684;&#x8C03;&#x7528;&#x8FC7;&#x7A0B;">&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#x7684;&#x8C03;&#x7528;&#x8FC7;&#x7A0B;</h3>
+<ol>
+<li>&#x8C03;&#x7528;org.springframework.boot.SpringApplicationRunListeners#starting&#x65B9;&#x6CD5;<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">starting</span><span class="hljs-params">(ConfigurableBootstrapContext bootstrapContext, Class&lt;?&gt; mainApplicationClass)</span> </span>{
+     doWithListeners(<span class="hljs-string">&quot;spring.boot.application.starting&quot;</span>, (listener) -&gt; listener.starting(bootstrapContext),
+             (step) -&gt; {
+                 <span class="hljs-keyword">if</span> (mainApplicationClass != <span class="hljs-keyword">null</span>) {
+                     step.tag(<span class="hljs-string">&quot;mainApplicationClass&quot;</span>, mainApplicationClass.getName());
+                 }
+             });
+ }
+</code></pre>
+</li>
+<li>&#x904D;&#x5386;SpringApplicationRunListener&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x6267;&#x884C;starting&#x65B9;&#x6CD5;<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doWithListeners</span><span class="hljs-params">(String stepName, Consumer&lt;SpringApplicationRunListener&gt; listenerAction,
+         Consumer&lt;StartupStep&gt; stepAction)</span> </span>{
+     StartupStep step = <span class="hljs-keyword">this</span>.applicationStartup.start(stepName);
+     <span class="hljs-keyword">this</span>.listeners.forEach(listenerAction);
+     <span class="hljs-keyword">if</span> (stepAction != <span class="hljs-keyword">null</span>) {
+         stepAction.accept(step);
+     }
+     step.end();
+ }
+</code></pre>
+</li>
+<li>&#x8C03;&#x7528;org.springframework.boot.context.event.EventPublishingRunListener#starting&#x65B9;&#x6CD5;<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">starting</span><span class="hljs-params">(ConfigurableBootstrapContext bootstrapContext)</span> </span>{
+     <span class="hljs-keyword">this</span>.initialMulticaster
+             .multicastEvent(<span class="hljs-keyword">new</span> ApplicationStartingEvent(bootstrapContext, <span class="hljs-keyword">this</span>.application, <span class="hljs-keyword">this</span>.args));
+ }
+</code></pre>
+</li>
+<li><p>&#x4E8B;&#x4EF6;&#x591A;&#x64AD;&#x5668;SimpleApplicationEventMulticaster&#x53D1;&#x5E03;ApplicationStartingEvent&#x4E8B;&#x4EF6;</p>
+<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">multicastEvent</span><span class="hljs-params">(ApplicationEvent event)</span> </span>{
+     multicastEvent(event, resolveDefaultEventType(event));
+ }
+
+ <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">multicastEvent</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ApplicationEvent event, @Nullable ResolvableType eventType)</span> </span>{
+     ResolvableType type = (eventType != <span class="hljs-keyword">null</span> ? eventType : resolveDefaultEventType(event));
+     Executor executor = getTaskExecutor();
+     <span class="hljs-keyword">for</span> (ApplicationListener&lt;?&gt; listener : getApplicationListeners(event, type)) {
+         <span class="hljs-keyword">if</span> (executor != <span class="hljs-keyword">null</span>) {
+             executor.execute(() -&gt; invokeListener(listener, event));
+         }
+         <span class="hljs-keyword">else</span> {
+             invokeListener(listener, event);
+         }
+     }
+ }
+</code></pre>
+</li>
+<li><p>&#x83B7;&#x53D6;&#x4E0E;SpringStartingEvent&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;ApplicationListener&#x76D1;&#x542C;&#x5668;&#x96C6;&#x5408;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">protected</span> Collection&lt;ApplicationListener&lt;?&gt;&gt; getApplicationListeners(
+         ApplicationEvent event, ResolvableType eventType) {
+
+     Object source = event.getSource();
+     Class&lt;?&gt; sourceType = (source != <span class="hljs-keyword">null</span> ? source.getClass() : <span class="hljs-keyword">null</span>);
+     ListenerCacheKey cacheKey = <span class="hljs-keyword">new</span> ListenerCacheKey(eventType, sourceType);
+
+     <span class="hljs-comment">// Potential new retriever to populate</span>
+     CachedListenerRetriever newRetriever = <span class="hljs-keyword">null</span>;
+
+     <span class="hljs-comment">//&#x5148;&#x68C0;&#x67E5;&#x7F13;&#x5B58;&#x4E2D;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;</span>
+     CachedListenerRetriever existingRetriever = <span class="hljs-keyword">this</span>.retrieverCache.get(cacheKey);
+     <span class="hljs-keyword">if</span> (existingRetriever == <span class="hljs-keyword">null</span>) {
+         <span class="hljs-comment">// Caching a new ListenerRetriever if possible</span>
+         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.beanClassLoader == <span class="hljs-keyword">null</span> ||
+                 (ClassUtils.isCacheSafe(event.getClass(), <span class="hljs-keyword">this</span>.beanClassLoader) &amp;&amp;
+                         (sourceType == <span class="hljs-keyword">null</span> || ClassUtils.isCacheSafe(sourceType, <span class="hljs-keyword">this</span>.beanClassLoader)))) {
+             newRetriever = <span class="hljs-keyword">new</span> CachedListenerRetriever();
+             existingRetriever = <span class="hljs-keyword">this</span>.retrieverCache.putIfAbsent(cacheKey, newRetriever);
+             <span class="hljs-keyword">if</span> (existingRetriever != <span class="hljs-keyword">null</span>) {
+                 newRetriever = <span class="hljs-keyword">null</span>;  <span class="hljs-comment">// no need to populate it in retrieveApplicationListeners</span>
+             }
+         }
+     }
+     <span class="hljs-comment">//&#x5982;&#x679C;&#x5B58;&#x5728;&#x7F13;&#x5B58;&#x4E14;ApplicationListener&#x96C6;&#x5408;&#x4E0D;&#x4E3A;null&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x3002;</span>
+     <span class="hljs-keyword">if</span> (existingRetriever != <span class="hljs-keyword">null</span>) {
+         Collection&lt;ApplicationListener&lt;?&gt;&gt; result = existingRetriever.getApplicationListeners();
+         <span class="hljs-keyword">if</span> (result != <span class="hljs-keyword">null</span>) {
+             <span class="hljs-keyword">return</span> result;
+         }
+         <span class="hljs-comment">// If result is null, the existing retriever is not fully populated yet by another thread.</span>
+         <span class="hljs-comment">// Proceed like caching wasn&apos;t possible for this current local attempt.</span>
+     }
+   <span class="hljs-comment">//&#x68C0;&#x7D22;ApplicationListener</span>
+     <span class="hljs-keyword">return</span> retrieveApplicationListeners(eventType, sourceType, newRetriever);
+ }
+</code></pre>
+</li>
+<li><p>&#x68C0;&#x7D22;ApplicationStartingEvent&#x4E8B;&#x4EF6;&#x7684;ApplicationListener&#x76D1;&#x542C;&#x5668;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">private</span> Collection&lt;ApplicationListener&lt;?&gt;&gt; retrieveApplicationListeners(
+         ResolvableType eventType, <span class="hljs-meta">@Nullable</span> Class&lt;?&gt; sourceType, <span class="hljs-meta">@Nullable</span> CachedListenerRetriever retriever) {
+
+     List&lt;ApplicationListener&lt;?&gt;&gt; allListeners = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+     Set&lt;ApplicationListener&lt;?&gt;&gt; filteredListeners = (retriever != <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">new</span> LinkedHashSet&lt;&gt;() : <span class="hljs-keyword">null</span>);
+     Set&lt;String&gt; filteredListenerBeans = (retriever != <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">new</span> LinkedHashSet&lt;&gt;() : <span class="hljs-keyword">null</span>);
+
+     Set&lt;ApplicationListener&lt;?&gt;&gt; listeners;
+     Set&lt;String&gt; listenerBeans;
+     <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>.defaultRetriever) {
+         listeners = <span class="hljs-keyword">new</span> LinkedHashSet&lt;&gt;(<span class="hljs-keyword">this</span>.defaultRetriever.applicationListeners);
+         listenerBeans = <span class="hljs-keyword">new</span> LinkedHashSet&lt;&gt;(<span class="hljs-keyword">this</span>.defaultRetriever.applicationListenerBeans);
+     }
+
+     <span class="hljs-comment">//&#x8FC7;&#x6EE4;&#x5DF2;&#x7F16;&#x7A0B;&#x65B9;&#x5F0F;&#x6CE8;&#x518C;&#x7684;&#x76D1;&#x542C;&#x5668;&#xFF0C;&#x5305;&#x62EC;&#x6765;&#x81EA;ApplicationListenerDetector(&#x5355;&#x4F8B;bean&#x548C;&#x5185;&#x90E8;bean)&#x7684;&#x76D1;&#x542C;&#x5668;</span>
+     <span class="hljs-keyword">for</span> (ApplicationListener&lt;?&gt; listener : listeners) {
+         <span class="hljs-keyword">if</span> (supportsEvent(listener, eventType, sourceType)) {
+             <span class="hljs-keyword">if</span> (retriever != <span class="hljs-keyword">null</span>) {
+                 filteredListeners.add(listener);
+             }
+             allListeners.add(listener);
+         }
+     }
+
+     <span class="hljs-comment">//&#x8FC7;&#x6EE4;&#x6309;&#x7167;bean&#x540D;&#x79F0;&#x6DFB;&#x52A0;&#x7684;&#x76D1;&#x542C;&#x5668;</span>
+     <span class="hljs-keyword">if</span> (!listenerBeans.isEmpty()) {
+         ConfigurableBeanFactory beanFactory = getBeanFactory();
+         <span class="hljs-keyword">for</span> (String listenerBeanName : listenerBeans) {
+             <span class="hljs-keyword">try</span> {
+                 <span class="hljs-keyword">if</span> (supportsEvent(beanFactory, listenerBeanName, eventType)) {
+                     ApplicationListener&lt;?&gt; listener =
+                             beanFactory.getBean(listenerBeanName, ApplicationListener.class);
+                     <span class="hljs-keyword">if</span> (!allListeners.contains(listener) &amp;&amp; supportsEvent(listener, eventType, sourceType)) {
+                         <span class="hljs-keyword">if</span> (retriever != <span class="hljs-keyword">null</span>) {
+                             <span class="hljs-keyword">if</span> (beanFactory.isSingleton(listenerBeanName)) {
+                                 filteredListeners.add(listener);
+                             }
+                             <span class="hljs-keyword">else</span> {
+                                 filteredListenerBeans.add(listenerBeanName);
+                             }
+                         }
+                         allListeners.add(listener);
+                     }
+                 }
+                 <span class="hljs-keyword">else</span> {
+                     <span class="hljs-comment">// Remove non-matching listeners that originally came from</span>
+                     <span class="hljs-comment">// ApplicationListenerDetector, possibly ruled out by additional</span>
+                     <span class="hljs-comment">// BeanDefinition metadata (e.g. factory method generics) above.</span>
+                     Object listener = beanFactory.getSingleton(listenerBeanName);
+                     <span class="hljs-keyword">if</span> (retriever != <span class="hljs-keyword">null</span>) {
+                         filteredListeners.remove(listener);
+                     }
+                     allListeners.remove(listener);
+                 }
+             }
+             <span class="hljs-keyword">catch</span> (NoSuchBeanDefinitionException ex) {
+                 <span class="hljs-comment">// Singleton listener instance (without backing bean definition) disappeared -</span>
+                 <span class="hljs-comment">// probably in the middle of the destruction phase</span>
+             }
+         }
+     }
+   <span class="hljs-comment">//&#x6392;&#x5E8F;</span>
+     AnnotationAwareOrderComparator.sort(allListeners);
+     <span class="hljs-keyword">if</span> (retriever != <span class="hljs-keyword">null</span>) {
+         <span class="hljs-keyword">if</span> (filteredListenerBeans.isEmpty()) {
+             retriever.applicationListeners = <span class="hljs-keyword">new</span> LinkedHashSet&lt;&gt;(allListeners);
+             retriever.applicationListenerBeans = filteredListenerBeans;
+         }
+         <span class="hljs-keyword">else</span> {
+             retriever.applicationListeners = filteredListeners;
+             retriever.applicationListenerBeans = filteredListenerBeans;
+         }
+     }
+     <span class="hljs-keyword">return</span> allListeners;
+ }
+</code></pre>
+</li>
+<li><p>&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x5177;&#x4F53;&#x7684;&#x8FC7;&#x6EE4;&#x65B9;&#x6CD5;supportsEvent</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">supportsEvent</span><span class="hljs-params">(
+     ApplicationListener&lt;?&gt; listener, ResolvableType eventType, @Nullable Class&lt;?&gt; sourceType)</span> </span>{
+
+ GenericApplicationListener smartListener = (listener <span class="hljs-keyword">instanceof</span> GenericApplicationListener ?
+         (GenericApplicationListener) listener : <span class="hljs-keyword">new</span> GenericApplicationListenerAdapter(listener));
+ <span class="hljs-keyword">return</span> (smartListener.supportsEventType(eventType) &amp;&amp; smartListener.supportsSourceType(sourceType));
+}
+</code></pre>
+<p>&#x9996;&#x5148;&#x5C06;ApplicaitonListener&#x8F6C;&#x5316;&#x4E3A;&#x6807;&#x51C6;&#x7684;&#x76D1;&#x542C;&#x5668;&#x63A5;&#x53E3;GenericApplicationListener
+&#x8C03;&#x7528;&#x76D1;&#x542C;&#x5668;&#x7684;supportsEventType&#x65B9;&#x6CD5;&#xFF08;&#x6821;&#x9A8C;&#x7684;&#x662F;ApplicationEvent&#xFF09;&#x548C;supportsSourceType&#x65B9;&#x6CD5;&#xFF08;&#x6821;&#x9A8C;&#x7684;&#x662F;&#x4E8B;&#x4EF6;&#x6E90;ApplicationEvent&#x4E2D;&#x7684;source&#xFF09;</p>
+</li>
+<li><p>&#x56DE;&#x8C03;org.springframework.context.ApplicationListener#onApplicationEvent&#x65B9;&#x6CD5;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">invokeListener</span><span class="hljs-params">(ApplicationListener&lt;?&gt; listener, ApplicationEvent event)</span> </span>{
+     ErrorHandler errorHandler = getErrorHandler();
+     <span class="hljs-keyword">if</span> (errorHandler != <span class="hljs-keyword">null</span>) {
+         <span class="hljs-keyword">try</span> {
+             doInvokeListener(listener, event);
+         }
+         <span class="hljs-keyword">catch</span> (Throwable err) {
+             errorHandler.handleError(err);
+         }
+     }
+     <span class="hljs-keyword">else</span> {
+         doInvokeListener(listener, event);
+     }
+ }
+</code></pre>
+</li>
+</ol>
+<h3 id="applicationstartingevent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;applicationlistener">ApplicationStartingEvent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;ApplicationListener</h3>
+<blockquote>
+<p>LoggingApplicationListener &#x68C0;&#x6D4B;&#x5E76;&#x8FD4;&#x56DE;&#x771F;&#x8BE5;&#x4F7F;&#x7528;&#x7684;&#x65E5;&#x5FD7;&#x7CFB;&#x7EDF;</p>
+</blockquote>
+<pre><code class="lang-java"><span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEvent</span><span class="hljs-params">(ApplicationEvent event)</span> </span>{
+        <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationStartingEvent) {
+            onApplicationStartingEvent((ApplicationStartingEvent) event);
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationEnvironmentPreparedEvent) {
+            onApplicationEnvironmentPreparedEvent((ApplicationEnvironmentPreparedEvent) event);
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationPreparedEvent) {
+            onApplicationPreparedEvent((ApplicationPreparedEvent) event);
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ContextClosedEvent) {
+            onContextClosedEvent((ContextClosedEvent) event);
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationFailedEvent) {
+            onApplicationFailedEvent();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationStartingEvent</span><span class="hljs-params">(ApplicationStartingEvent event)</span> </span>{
+        <span class="hljs-keyword">this</span>.loggingSystem = LoggingSystem.get(event.getSpringApplication().getClassLoader());
+        <span class="hljs-keyword">this</span>.loggingSystem.beforeInitialize();
+    }
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SpringApplicationRunListeners.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 3.获取SpringApplicationRunListeners">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"4.事件发布：ApplicationStartingEvent","level":"1.3.4","depth":2,"next":{"title":"三、接口详解","level":"1.4","depth":1,"ref":"","articles":[{"title":"1.BootstrapRegistryInitializer接口详解","level":"1.4.1","depth":2,"path":"interface/BootstrapRegistryInitializer.md","ref":"interface/BootstrapRegistryInitializer.md","articles":[]},{"title":"2.BootstrapContext接口详解","level":"1.4.2","depth":2,"path":"interface/BootstrapContext.md","ref":"interface/BootstrapContext.md","articles":[]},{"title":"3.BootstrapRegistry接口详解","level":"1.4.3","depth":2,"path":"interface/BootstrapRegistry.md","ref":"interface/BootstrapRegistry.md","articles":[]}]},"previous":{"title":"3.获取SpringApplicationRunListeners","level":"1.3.3","depth":2,"path":"ch02/SpringApplicationRunListeners.md","ref":"ch02/SpringApplicationRunListeners.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch02/ApplicationStartingEvent.md","mtime":"2024-03-26T03:26:03.529Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-26T03:26:05.532Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

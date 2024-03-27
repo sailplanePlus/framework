@@ -8,6 +8,7 @@
     * [1.创建引导上下文DefaultBootstrapContext](ch02/DefaultBootstrapContext.md)
     * [2.设置系统属性java.awt.headless](ch02/systemProperty.md)
     * [3.获取SpringApplicationRunListeners](ch02/SpringApplicationRunListeners.md)
+    * [4.事件发布：ApplicationStartingEvent](ch02/ApplicationStartingEvent.md)
 * 三、接口详解
     * [1.BootstrapRegistryInitializer接口详解](interface/BootstrapRegistryInitializer.md)
     * [2.BootstrapContext接口详解](interface/BootstrapContext.md)

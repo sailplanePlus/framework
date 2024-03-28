@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>1.什么是SpringApplication · GitBook</title>
+        <title>4.附加属性源"configurationProperties" · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="创建SpringApplication.html" />
+    <link rel="next" href="ApplicationEnvironmentPreparedEvent.html" />
     
+    
+    <link rel="prev" href="configureEnvironment.html" />
     
 
     </head>
@@ -114,9 +116,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="什么是SpringApplication.html">
+        <li class="chapter " data-level="1.2.1" data-path="../ch01/什么是SpringApplication.html">
             
-                <a href="什么是SpringApplication.html">
+                <a href="../ch01/什么是SpringApplication.html">
             
                     
                     1.什么是SpringApplication
@@ -127,9 +129,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="创建SpringApplication.html">
+        <li class="chapter " data-level="1.2.2" data-path="../ch01/创建SpringApplication.html">
             
-                <a href="创建SpringApplication.html">
+                <a href="../ch01/创建SpringApplication.html">
             
                     
                     2.创建SpringApplication
@@ -216,9 +218,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../ch03/run.html">
+        <li class="chapter " data-level="1.4" data-path="run.html">
             
-                <a href="../ch03/run.html">
+                <a href="run.html">
             
                     
                     三、创建并配置Enviorment
@@ -230,9 +232,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../ch03/ApplicationArguments.html">
+        <li class="chapter " data-level="1.4.1" data-path="ApplicationArguments.html">
             
-                <a href="../ch03/ApplicationArguments.html">
+                <a href="ApplicationArguments.html">
             
                     
                     1.创建ApplicationArguments
@@ -243,9 +245,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../ch03/ApplicationServletEnvironment.html">
+        <li class="chapter " data-level="1.4.2" data-path="ApplicationServletEnvironment.html">
             
-                <a href="../ch03/ApplicationServletEnvironment.html">
+                <a href="ApplicationServletEnvironment.html">
             
                     
                     2.获取或者创建ApplicationServletEnvironment
@@ -256,9 +258,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../ch03/configureEnvironment.html">
+        <li class="chapter " data-level="1.4.3" data-path="configureEnvironment.html">
             
-                <a href="../ch03/configureEnvironment.html">
+                <a href="configureEnvironment.html">
             
                     
                     3.配置ApplicationServletEnvironment
@@ -269,9 +271,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../ch03/attachConfigurationProperties.html">
+        <li class="chapter active" data-level="1.4.4" data-path="attachConfigurationProperties.html">
             
-                <a href="../ch03/attachConfigurationProperties.html">
+                <a href="attachConfigurationProperties.html">
             
                     
                     4.附加属性源"configurationProperties"
@@ -282,9 +284,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5" data-path="../ch03/ApplicationEnvironmentPreparedEvent.html">
+        <li class="chapter " data-level="1.4.5" data-path="ApplicationEnvironmentPreparedEvent.html">
             
-                <a href="../ch03/ApplicationEnvironmentPreparedEvent.html">
+                <a href="ApplicationEnvironmentPreparedEvent.html">
             
                     
                     5.事件发布：ApplicationEnvironmentPreparedEvent
@@ -388,7 +390,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >1.什么是SpringApplication</a>
+        <a href=".." >4.附加属性源"configurationProperties"</a>
     </h1>
 </div>
 
@@ -403,40 +405,23 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x4EC0;&#x4E48;&#x662F;springapplication">&#x4EC0;&#x4E48;&#x662F;SpringApplication</h1>
-<p>&#x8BE5;&#x7C7B;&#x53EF;&#x7528;&#x4E8E;&#x4ECE;Java&#x4E3B;&#x65B9;&#x6CD5;&#x5F15;&#x5BFC;&#x548C;&#x542F;&#x52A8;Spring&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8BE5;&#x7C7B;&#x5C06;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x6765;&#x5F15;&#x5BFC;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF1A;</p>
-<ul>
-<li>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x9002;&#x5F53;&#x7684;ApplicationContext&#x5B9E;&#x4F8B;</li>
-<li>&#x6CE8;&#x518C;&#x4E00;&#x4E2A;CommandLinePropertySource&#xFF0C;&#x5C06;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x516C;&#x5F00;&#x4E3A;Spring&#x5C5E;&#x6027;</li>
-<li>&#x5237;&#x65B0;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x52A0;&#x8F7D;&#x6240;&#x6709;&#x5355;&#x4F8B;bean</li>
-<li>&#x89E6;&#x53D1;&#x4EFB;&#x4F55;CommandlineRunner bean</li>
-</ul>
-<p>&#x5728;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x9759;&#x6001;run(Class, String[]) &#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4ECE;main&#x65B9;&#x6CD5;&#x4E2D;&#x8C03;&#x7528;&#x6765;&#x5F15;&#x5BFC;&#x996E;&#x7528;&#x7A0B;&#x5E8F;&#xFF1A;</p>
-<pre><code class="lang-java">  <span class="hljs-meta">@Configuration</span>
-  <span class="hljs-meta">@EnableAutoConfiguration</span>
-  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApplication</span>  </span>{
-
-    <span class="hljs-comment">// ... Bean definitions</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
-      SpringApplication.run(MyApplication.class, args);
+                                <h1 id="&#x9644;&#x52A0;&#x5C5E;&#x6027;&#x6E90;configurationproperties">&#x9644;&#x52A0;&#x5C5E;&#x6027;&#x6E90;&quot;configurationProperties&quot;</h1>
+<p>&#x68C0;&#x67E5;&#x5C5E;&#x6027;&#x6E90;PropertySources&#x4E2D;&#x662F;&#x5426;&#x5B58;&#x5728;&quot;configurationProperties&quot;&#x6E90;&#xFF0C;&#x5E76;&#x4E14;&#x662F;ConfigurationPropertySourcesPropertySource&#x7C7B;&#x578B;&#x7684;&#xFF0C;&#x5426;&#x5219;&#x5C31;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;ConfigurationPropertySourcesPropertySource&#xFF0C;&#x6DFB;&#x52A0;&#x5230;&#x5C5E;&#x6027;&#x6E90;&#x7684;&#x9996;&#x4F4D;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">attach</span><span class="hljs-params">(Environment environment)</span> </span>{
+    Assert.isInstanceOf(ConfigurableEnvironment.class, environment);
+    MutablePropertySources sources = ((ConfigurableEnvironment) environment).getPropertySources();
+    PropertySource&lt;?&gt; attached = getAttached(sources);
+    <span class="hljs-keyword">if</span> (attached == <span class="hljs-keyword">null</span> || !isUsingSources(attached, sources)) {
+        attached = <span class="hljs-keyword">new</span> ConfigurationPropertySourcesPropertySource(ATTACHED_PROPERTY_SOURCE_NAME,
+                <span class="hljs-keyword">new</span> SpringConfigurationPropertySources(sources));
     }
-  }
+    sources.remove(ATTACHED_PROPERTY_SOURCE_NAME);
+    sources.addFirst(attached);
+}
 </code></pre>
-<p>&#x5BF9;&#x4E8E;&#x66F4;&#x9AD8;&#x7EA7;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x4E4B;&#x524D;&#x521B;&#x5EFA;&#x548C;&#x5B9A;&#x5236;&#x4E00;&#x4E2A;SpringApplication&#x5B9E;&#x4F8B;&#xFF1A;</p>
-<pre><code class="lang-java">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
-    SpringApplication application = <span class="hljs-keyword">new</span> SpringApplication(MyApplication.class);
-    <span class="hljs-comment">// ... customize application settings here</span>
-    application.run(args)
-  }
-</code></pre>
-<p>SpringApplication&#x53EF;&#x4EE5;&#x4ECE;&#x5404;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x6765;&#x6E90;&#x8BFB;&#x53D6;bean&#x3002;&#x901A;&#x5E38;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;@Configuration&#x7C7B;&#x6765;&#x5F15;&#x5BFC;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x4F46;&#x662F;&#xFF0C;&#x4F60;&#x53EF;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x6E90;&#xFF1A;</p>
 <blockquote>
-<p>&#x7531;AnnotatedBeanDefinitionReader&#x52A0;&#x8F7D;&#x7684;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;
-&#x7531;XmlBeanDefinitionReader&#x52A0;&#x8F7D;XML&#x8D44;&#x6E90;&#xFF0C;&#x6216;&#x8005;GroovyBeanDefinitionReader&#x52A0;&#x8F7D;groovy&#x811A;&#x672C;
-&#x8981;&#x88AB;ClassPathBeanDefinitionScanner&#x626B;&#x63CF;&#x7684;&#x5305;&#x540D;&#x79F0;</p>
+<p>&#x9644;&#x52A0;ConfirgurationPropertySource&#x652F;&#x6301;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x73AF;&#x5883;&#x4E2D;&#x3002;&#x8FD9;&#x4F1A;&#x5C06;&#x73AF;&#x5883;&#x7BA1;&#x7406;&#x7684;&#x6BCF;&#x4E2A;PropertySource&#x8C03;&#x6574;&#x4E3A;ConfigurationPropertySource&#xFF0C;&#x5E76;&#x5141;&#x8BB8;&#x7ECF;&#x5178;&#x7684;PropertySourcesPropertyResolver&#x8C03;&#x7528;&#x4EE5;&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x8FDB;&#x884C;&#x89E3;&#x6790;&#x3002;</p>
 </blockquote>
-<p>&#x914D;&#x7F6E;&#x5C5E;&#x6027;&#x4E5F;&#x7ED1;&#x5B9A;&#x5230;SpringApplication&#x3002;&#x8FD9;&#x4F7F;&#x5F97;&#x52A8;&#x6001;&#x8BBE;&#x7F6E;SpringApplication&#x5C5E;&#x6027;&#x6210;&#x4E3A;&#x53EF;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;&#x989D;&#x5916;&#x7684;&#x8D44;&#x6E90;(&quot;spring.main.sources&quot; - a CSV list)&#x3001;&#x8868;&#x793A;web&#x73AF;&#x5883;&#x7684;&#x6807;&#x5FD7;(&quot;spring.main.web-application-type=none&quot;)&#x6216;&#x8005;&#x5173;&#x95ED;banner&#x7684;&#x6807;&#x5FD7; (&quot;spring.main.banner-mode=off&quot;)</p>
 
                                 
                                 </section>
@@ -464,8 +449,12 @@
 
             
                 
+                <a href="configureEnvironment.html" class="navigation navigation-prev " aria-label="Previous page: 3.配置ApplicationServletEnvironment">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="创建SpringApplication.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 2.创建SpringApplication">
+                
+                <a href="ApplicationEnvironmentPreparedEvent.html" class="navigation navigation-next " aria-label="Next page: 5.事件发布：ApplicationEnvironmentPreparedEvent">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -476,7 +465,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.什么是SpringApplication","level":"1.2.1","depth":2,"next":{"title":"2.创建SpringApplication","level":"1.2.2","depth":2,"path":"ch01/创建SpringApplication.md","ref":"ch01/创建SpringApplication.md","articles":[]},"previous":{"title":"一、关于SpringApplication","level":"1.2","depth":1,"ref":"","articles":[{"title":"1.什么是SpringApplication","level":"1.2.1","depth":2,"path":"ch01/什么是SpringApplication.md","ref":"ch01/什么是SpringApplication.md","articles":[]},{"title":"2.创建SpringApplication","level":"1.2.2","depth":2,"path":"ch01/创建SpringApplication.md","ref":"ch01/创建SpringApplication.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch01/什么是SpringApplication.md","mtime":"2024-03-22T07:22:12.412Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-28T11:01:44.389Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4.附加属性源\"configurationProperties\"","level":"1.4.4","depth":2,"next":{"title":"5.事件发布：ApplicationEnvironmentPreparedEvent","level":"1.4.5","depth":2,"path":"ch03/ApplicationEnvironmentPreparedEvent.md","ref":"ch03/ApplicationEnvironmentPreparedEvent.md","articles":[]},"previous":{"title":"3.配置ApplicationServletEnvironment","level":"1.4.3","depth":2,"path":"ch03/configureEnvironment.md","ref":"ch03/configureEnvironment.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch03/attachConfigurationProperties.md","mtime":"2024-03-28T10:25:52.450Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-28T11:01:44.389Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1,24 +1,19 @@
-# 事件发布：ApplicationStartingEvent
+# 事件发布：ApplicationEnvironmentPreparedEvent
 
 ### 官方解读：
-> 事件在SpringApplication启动后，在Environment或ApplicationContext可用之前，尽可能早的发布，但在ApplicationListeners注册之后。
-> 事件的源是SpringApplication本身，但是要注意在早期阶段不要过多的使用它的内部状态，因为可能在生命周期的后期被修改。
+> 当SpringApplication启动并且环境首次可用于检查和修改时，会发布一个事件。
 
-### 事件发布的调用过程
-1. 调用org.springframework.boot.SpringApplicationRunListeners#starting方法
+### 事件发布过程
+1. 调用org.springframework.boot.SpringApplicationRunListeners#environmentPrepared方法
 ```java
-void starting(ConfigurableBootstrapContext bootstrapContext, Class<?> mainApplicationClass) {
-		doWithListeners("spring.boot.application.starting", (listener) -> listener.starting(bootstrapContext),
-				(step) -> {
-					if (mainApplicationClass != null) {
-						step.tag("mainApplicationClass", mainApplicationClass.getName());
-					}
-				});
-	}
+    void environmentPrepared(ConfigurableBootstrapContext bootstrapContext, ConfigurableEnvironment environment) {
+    		doWithListeners("spring.boot.application.environment-prepared",
+    				(listener) -> listener.environmentPrepared(bootstrapContext, environment));
+    }
 ```
-2. 遍历SpringApplicationRunListener的集合，执行starting方法
+2. 遍历SpringApplicationRunListener集合，执行environmentPrepared方法
 ```java
-private void doWithListeners(String stepName, Consumer<SpringApplicationRunListener> listenerAction,
+	private void doWithListeners(String stepName, Consumer<SpringApplicationRunListener> listenerAction,
 			Consumer<StartupStep> stepAction) {
 		StartupStep step = this.applicationStartup.start(stepName);
 		this.listeners.forEach(listenerAction);
@@ -28,17 +23,18 @@ private void doWithListeners(String stepName, Consumer<SpringApplicationRunListe
 		step.end();
 	}
 ```
-3. 调用org.springframework.boot.context.event.EventPublishingRunListener#starting方法
+3. 调用org.springframework.boot.context.event.EventPublishingRunListener#environmentPrepared方法
 ```java
-    @Override
-	public void starting(ConfigurableBootstrapContext bootstrapContext) {
-		this.initialMulticaster
-				.multicastEvent(new ApplicationStartingEvent(bootstrapContext, this.application, this.args));
+	@Override
+	public void environmentPrepared(ConfigurableBootstrapContext bootstrapContext,
+			ConfigurableEnvironment environment) {
+		this.initialMulticaster.multicastEvent(
+				new ApplicationEnvironmentPreparedEvent(bootstrapContext, this.application, this.args, environment));
 	}
 ```
-4. 事件多播器SimpleApplicationEventMulticaster发布ApplicationStartingEvent事件
+4. 事件多播器SimpleApplicationEventMulticaster发布ApplicationEnvironmentPreparedEvent事件
 ```java
-    @Override
+	@Override
 	public void multicastEvent(ApplicationEvent event) {
 		multicastEvent(event, resolveDefaultEventType(event));
 	}
@@ -57,9 +53,9 @@ private void doWithListeners(String stepName, Consumer<SpringApplicationRunListe
 		}
 	}
 ```
-5. 获取与SpringStartingEvent事件类型匹配的ApplicationListener监听器集合。
+5. 获取与ApplicationEnvironmentPreparedEvent事件类型匹配的ApplicationListener监听器集合。
 ```java
-protected Collection<ApplicationListener<?>> getApplicationListeners(
+	protected Collection<ApplicationListener<?>> getApplicationListeners(
 			ApplicationEvent event, ResolvableType eventType) {
 
 		Object source = event.getSource();
@@ -96,7 +92,7 @@ protected Collection<ApplicationListener<?>> getApplicationListeners(
 		return retrieveApplicationListeners(eventType, sourceType, newRetriever);
 	}
 ```
-6. 检索ApplicationStartingEvent事件的ApplicationListener监听器
+6. 检索ApplicationEnvironmentPreparedEvent事件的ApplicationListener
 ```java
 private Collection<ApplicationListener<?>> retrieveApplicationListeners(
 			ResolvableType eventType, @Nullable Class<?> sourceType, @Nullable CachedListenerRetriever retriever) {
@@ -204,32 +200,4 @@ protected void invokeListener(ApplicationListener<?> listener, ApplicationEvent 
 		}
 	}
 ```
-
 ### ApplicationStartingEvent事件具体回调的ApplicationListener
-> LoggingApplicationListener 检测并返回真该使用的日志系统
-
-```java
-@Override
-	public void onApplicationEvent(ApplicationEvent event) {
-		if (event instanceof ApplicationStartingEvent) {
-			onApplicationStartingEvent((ApplicationStartingEvent) event);
-		}
-		else if (event instanceof ApplicationEnvironmentPreparedEvent) {
-			onApplicationEnvironmentPreparedEvent((ApplicationEnvironmentPreparedEvent) event);
-		}
-		else if (event instanceof ApplicationPreparedEvent) {
-			onApplicationPreparedEvent((ApplicationPreparedEvent) event);
-		}
-		else if (event instanceof ContextClosedEvent) {
-			onContextClosedEvent((ContextClosedEvent) event);
-		}
-		else if (event instanceof ApplicationFailedEvent) {
-			onApplicationFailedEvent();
-		}
-	}
-
-	private void onApplicationStartingEvent(ApplicationStartingEvent event) {
-		this.loggingSystem = LoggingSystem.get(event.getSpringApplication().getClassLoader());
-		this.loggingSystem.beforeInitialize();
-	}
-```

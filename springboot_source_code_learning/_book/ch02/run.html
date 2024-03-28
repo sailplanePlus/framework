@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>二、运行SpringApplication · GitBook</title>
+        <title>二、启动SpringApplication · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -152,7 +152,7 @@
                 <a href="run.html">
             
                     
-                    二、运行SpringApplication
+                    二、启动SpringApplication
             
                 </a>
             
@@ -218,12 +218,96 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" >
+        <li class="chapter " data-level="1.4" data-path="../ch03/run.html">
+            
+                <a href="../ch03/run.html">
+            
+                    
+                    三、创建并配置Enviorment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../ch03/ApplicationArguments.html">
+            
+                <a href="../ch03/ApplicationArguments.html">
+            
+                    
+                    1.创建ApplicationArguments
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../ch03/ApplicationServletEnvironment.html">
+            
+                <a href="../ch03/ApplicationServletEnvironment.html">
+            
+                    
+                    2.获取或者创建ApplicationServletEnvironment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../ch03/configureEnvironment.html">
+            
+                <a href="../ch03/configureEnvironment.html">
+            
+                    
+                    3.配置ApplicationServletEnvironment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../ch03/attachConfigurationProperties.html">
+            
+                <a href="../ch03/attachConfigurationProperties.html">
+            
+                    
+                    4.附加属性源"configurationProperties"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../ch03/ApplicationEnvironmentPreparedEvent.html">
+            
+                <a href="../ch03/ApplicationEnvironmentPreparedEvent.html">
+            
+                    
+                    5.事件发布：ApplicationEnvironmentPreparedEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
             
                 <span>
             
                     
-                    三、接口详解
+                    四、接口详解
             
                 </span>
             
@@ -232,7 +316,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../interface/BootstrapRegistryInitializer.html">
+        <li class="chapter " data-level="1.5.1" data-path="../interface/BootstrapRegistryInitializer.html">
             
                 <a href="../interface/BootstrapRegistryInitializer.html">
             
@@ -245,7 +329,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../interface/BootstrapContext.html">
+        <li class="chapter " data-level="1.5.2" data-path="../interface/BootstrapContext.html">
             
                 <a href="../interface/BootstrapContext.html">
             
@@ -258,7 +342,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../interface/BootstrapRegistry.md">
+        <li class="chapter " data-level="1.5.3" data-path="../interface/BootstrapRegistry.md">
             
                 <span>
             
@@ -306,7 +390,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >二、运行SpringApplication</a>
+        <a href=".." >二、启动SpringApplication</a>
     </h1>
 </div>
 
@@ -321,7 +405,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x8FD0;&#x884C;spring&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x521B;&#x5EFA;&#x5E76;&#x5237;&#x65B0;&#x4E00;&#x4E2A;&#x65B0;&#x7684;applicationcontext">&#x8FD0;&#x884C;Spring&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x521B;&#x5EFA;&#x5E76;&#x5237;&#x65B0;&#x4E00;&#x4E2A;&#x65B0;&#x7684;ApplicationContext</h1>
+                                <h1 id="&#x542F;&#x52A8;springapplication&#x5E94;&#x7528;&#x7A0B;&#x5E8F;">&#x542F;&#x52A8;SpringApplication&#x5E94;&#x7528;&#x7A0B;&#x5E8F;</h1>
 <pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> ConfigurableApplicationContext <span class="hljs-title">run</span><span class="hljs-params">(String... args)</span> </span>{
         <span class="hljs-keyword">long</span> startTime = System.nanoTime();
         <span class="hljs-comment">/**
@@ -338,37 +422,10 @@
           * EventPublishingRunListener
         */</span>
         SpringApplicationRunListeners listeners = getRunListeners(args);
+        <span class="hljs-comment">//4.&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#xFF1A;ApplicationStartingEvent</span>
         listeners.starting(bootstrapContext, <span class="hljs-keyword">this</span>.mainApplicationClass);
-        <span class="hljs-keyword">try</span> {
-            ApplicationArguments applicationArguments = <span class="hljs-keyword">new</span> DefaultApplicationArguments(args);
-            ConfigurableEnvironment environment = prepareEnvironment(listeners, bootstrapContext, applicationArguments);
-            configureIgnoreBeanInfo(environment);
-            Banner printedBanner = printBanner(environment);
-            context = createApplicationContext();
-            context.setApplicationStartup(<span class="hljs-keyword">this</span>.applicationStartup);
-            prepareContext(bootstrapContext, context, environment, listeners, applicationArguments, printedBanner);
-            refreshContext(context);
-            afterRefresh(context, applicationArguments);
-            Duration timeTakenToStartup = Duration.ofNanos(System.nanoTime() - startTime);
-            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.logStartupInfo) {
-                <span class="hljs-keyword">new</span> StartupInfoLogger(<span class="hljs-keyword">this</span>.mainApplicationClass).logStarted(getApplicationLog(), timeTakenToStartup);
-            }
-            listeners.started(context, timeTakenToStartup);
-            callRunners(context, applicationArguments);
-        }
-        <span class="hljs-keyword">catch</span> (Throwable ex) {
-            handleRunFailure(context, ex, listeners);
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(ex);
-        }
-        <span class="hljs-keyword">try</span> {
-            Duration timeTakenToReady = Duration.ofNanos(System.nanoTime() - startTime);
-            listeners.ready(context, timeTakenToReady);
-        }
-        <span class="hljs-keyword">catch</span> (Throwable ex) {
-            handleRunFailure(context, ex, <span class="hljs-keyword">null</span>);
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(ex);
-        }
-        <span class="hljs-keyword">return</span> context;
+
+        ...
     }
 </code></pre>
 
@@ -414,7 +471,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"二、运行SpringApplication","level":"1.3","depth":1,"next":{"title":"1.创建引导上下文DefaultBootstrapContext","level":"1.3.1","depth":2,"path":"ch02/DefaultBootstrapContext.md","ref":"ch02/DefaultBootstrapContext.md","articles":[]},"previous":{"title":"2.创建SpringApplication","level":"1.2.2","depth":2,"path":"ch01/创建SpringApplication.md","ref":"ch01/创建SpringApplication.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch02/run.md","mtime":"2024-03-26T11:02:42.880Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-27T03:55:32.099Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"二、启动SpringApplication","level":"1.3","depth":1,"next":{"title":"1.创建引导上下文DefaultBootstrapContext","level":"1.3.1","depth":2,"path":"ch02/DefaultBootstrapContext.md","ref":"ch02/DefaultBootstrapContext.md","articles":[]},"previous":{"title":"2.创建SpringApplication","level":"1.2.2","depth":2,"path":"ch01/创建SpringApplication.md","ref":"ch01/创建SpringApplication.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch02/run.md","mtime":"2024-03-28T04:02:27.206Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-28T11:01:44.389Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

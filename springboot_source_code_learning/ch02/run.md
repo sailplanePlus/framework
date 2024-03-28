@@ -1,4 +1,4 @@
-# 运行Spring应用程序，创建并刷新一个新的ApplicationContext
+# 启动SpringApplication应用程序
 
 ```java
 public ConfigurableApplicationContext run(String... args) {
@@ -19,35 +19,7 @@ public ConfigurableApplicationContext run(String... args) {
 		SpringApplicationRunListeners listeners = getRunListeners(args);
 		//4.事件发布：ApplicationStartingEvent
 		listeners.starting(bootstrapContext, this.mainApplicationClass);
-		try {
-			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
-			ConfigurableEnvironment environment = prepareEnvironment(listeners, bootstrapContext, applicationArguments);
-			configureIgnoreBeanInfo(environment);
-			Banner printedBanner = printBanner(environment);
-			context = createApplicationContext();
-			context.setApplicationStartup(this.applicationStartup);
-			prepareContext(bootstrapContext, context, environment, listeners, applicationArguments, printedBanner);
-			refreshContext(context);
-			afterRefresh(context, applicationArguments);
-			Duration timeTakenToStartup = Duration.ofNanos(System.nanoTime() - startTime);
-			if (this.logStartupInfo) {
-				new StartupInfoLogger(this.mainApplicationClass).logStarted(getApplicationLog(), timeTakenToStartup);
-			}
-			listeners.started(context, timeTakenToStartup);
-			callRunners(context, applicationArguments);
-		}
-		catch (Throwable ex) {
-			handleRunFailure(context, ex, listeners);
-			throw new IllegalStateException(ex);
-		}
-		try {
-			Duration timeTakenToReady = Duration.ofNanos(System.nanoTime() - startTime);
-			listeners.ready(context, timeTakenToReady);
-		}
-		catch (Throwable ex) {
-			handleRunFailure(context, ex, null);
-			throw new IllegalStateException(ex);
-		}
-		return context;
+		
+		...
 	}
 ```

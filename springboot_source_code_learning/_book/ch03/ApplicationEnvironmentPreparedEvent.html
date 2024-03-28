@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>4.事件发布：ApplicationStartingEvent · GitBook</title>
+        <title>5.事件发布：ApplicationEnvironmentPreparedEvent · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../ch03/run.html" />
     
-    
-    <link rel="prev" href="SpringApplicationRunListeners.html" />
+    <link rel="prev" href="attachConfigurationProperties.html" />
     
 
     </head>
@@ -147,9 +145,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="run.html">
+        <li class="chapter " data-level="1.3" data-path="../ch02/run.html">
             
-                <a href="run.html">
+                <a href="../ch02/run.html">
             
                     
                     二、启动SpringApplication
@@ -161,9 +159,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="DefaultBootstrapContext.html">
+        <li class="chapter " data-level="1.3.1" data-path="../ch02/DefaultBootstrapContext.html">
             
-                <a href="DefaultBootstrapContext.html">
+                <a href="../ch02/DefaultBootstrapContext.html">
             
                     
                     1.创建引导上下文DefaultBootstrapContext
@@ -174,9 +172,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="systemProperty.html">
+        <li class="chapter " data-level="1.3.2" data-path="../ch02/systemProperty.html">
             
-                <a href="systemProperty.html">
+                <a href="../ch02/systemProperty.html">
             
                     
                     2.设置系统属性java.awt.headless
@@ -187,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="SpringApplicationRunListeners.html">
+        <li class="chapter " data-level="1.3.3" data-path="../ch02/SpringApplicationRunListeners.html">
             
-                <a href="SpringApplicationRunListeners.html">
+                <a href="../ch02/SpringApplicationRunListeners.html">
             
                     
                     3.获取SpringApplicationRunListeners
@@ -200,9 +198,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.4" data-path="ApplicationStartingEvent.html">
+        <li class="chapter " data-level="1.3.4" data-path="../ch02/ApplicationStartingEvent.html">
             
-                <a href="ApplicationStartingEvent.html">
+                <a href="../ch02/ApplicationStartingEvent.html">
             
                     
                     4.事件发布：ApplicationStartingEvent
@@ -218,9 +216,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../ch03/run.html">
+        <li class="chapter " data-level="1.4" data-path="run.html">
             
-                <a href="../ch03/run.html">
+                <a href="run.html">
             
                     
                     三、创建并配置Enviorment
@@ -232,9 +230,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../ch03/ApplicationArguments.html">
+        <li class="chapter " data-level="1.4.1" data-path="ApplicationArguments.html">
             
-                <a href="../ch03/ApplicationArguments.html">
+                <a href="ApplicationArguments.html">
             
                     
                     1.创建ApplicationArguments
@@ -245,9 +243,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../ch03/ApplicationServletEnvironment.html">
+        <li class="chapter " data-level="1.4.2" data-path="ApplicationServletEnvironment.html">
             
-                <a href="../ch03/ApplicationServletEnvironment.html">
+                <a href="ApplicationServletEnvironment.html">
             
                     
                     2.获取或者创建ApplicationServletEnvironment
@@ -258,9 +256,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../ch03/configureEnvironment.html">
+        <li class="chapter " data-level="1.4.3" data-path="configureEnvironment.html">
             
-                <a href="../ch03/configureEnvironment.html">
+                <a href="configureEnvironment.html">
             
                     
                     3.配置ApplicationServletEnvironment
@@ -271,9 +269,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../ch03/attachConfigurationProperties.html">
+        <li class="chapter " data-level="1.4.4" data-path="attachConfigurationProperties.html">
             
-                <a href="../ch03/attachConfigurationProperties.html">
+                <a href="attachConfigurationProperties.html">
             
                     
                     4.附加属性源"configurationProperties"
@@ -284,9 +282,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5" data-path="../ch03/ApplicationEnvironmentPreparedEvent.html">
+        <li class="chapter active" data-level="1.4.5" data-path="ApplicationEnvironmentPreparedEvent.html">
             
-                <a href="../ch03/ApplicationEnvironmentPreparedEvent.html">
+                <a href="ApplicationEnvironmentPreparedEvent.html">
             
                     
                     5.事件发布：ApplicationEnvironmentPreparedEvent
@@ -390,7 +388,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >4.事件发布：ApplicationStartingEvent</a>
+        <a href=".." >5.事件发布：ApplicationEnvironmentPreparedEvent</a>
     </h1>
 </div>
 
@@ -405,25 +403,20 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#xFF1A;applicationstartingevent">&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#xFF1A;ApplicationStartingEvent</h1>
+                                <h1 id="&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#xFF1A;applicationenvironmentpreparedevent">&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#xFF1A;ApplicationEnvironmentPreparedEvent</h1>
 <h3 id="&#x5B98;&#x65B9;&#x89E3;&#x8BFB;&#xFF1A;">&#x5B98;&#x65B9;&#x89E3;&#x8BFB;&#xFF1A;</h3>
 <blockquote>
-<p>&#x4E8B;&#x4EF6;&#x5728;SpringApplication&#x542F;&#x52A8;&#x540E;&#xFF0C;&#x5728;Environment&#x6216;ApplicationContext&#x53EF;&#x7528;&#x4E4B;&#x524D;&#xFF0C;&#x5C3D;&#x53EF;&#x80FD;&#x65E9;&#x7684;&#x53D1;&#x5E03;&#xFF0C;&#x4F46;&#x5728;ApplicationListeners&#x6CE8;&#x518C;&#x4E4B;&#x540E;&#x3002;
-&#x4E8B;&#x4EF6;&#x7684;&#x6E90;&#x662F;SpringApplication&#x672C;&#x8EAB;&#xFF0C;&#x4F46;&#x662F;&#x8981;&#x6CE8;&#x610F;&#x5728;&#x65E9;&#x671F;&#x9636;&#x6BB5;&#x4E0D;&#x8981;&#x8FC7;&#x591A;&#x7684;&#x4F7F;&#x7528;&#x5B83;&#x7684;&#x5185;&#x90E8;&#x72B6;&#x6001;&#xFF0C;&#x56E0;&#x4E3A;&#x53EF;&#x80FD;&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x540E;&#x671F;&#x88AB;&#x4FEE;&#x6539;&#x3002;</p>
+<p>&#x5F53;SpringApplication&#x542F;&#x52A8;&#x5E76;&#x4E14;&#x73AF;&#x5883;&#x9996;&#x6B21;&#x53EF;&#x7528;&#x4E8E;&#x68C0;&#x67E5;&#x548C;&#x4FEE;&#x6539;&#x65F6;&#xFF0C;&#x4F1A;&#x53D1;&#x5E03;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x3002;</p>
 </blockquote>
-<h3 id="&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#x7684;&#x8C03;&#x7528;&#x8FC7;&#x7A0B;">&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#x7684;&#x8C03;&#x7528;&#x8FC7;&#x7A0B;</h3>
+<h3 id="&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#x8FC7;&#x7A0B;">&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#x8FC7;&#x7A0B;</h3>
 <ol>
-<li>&#x8C03;&#x7528;org.springframework.boot.SpringApplicationRunListeners#starting&#x65B9;&#x6CD5;<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">starting</span><span class="hljs-params">(ConfigurableBootstrapContext bootstrapContext, Class&lt;?&gt; mainApplicationClass)</span> </span>{
-     doWithListeners(<span class="hljs-string">&quot;spring.boot.application.starting&quot;</span>, (listener) -&gt; listener.starting(bootstrapContext),
-             (step) -&gt; {
-                 <span class="hljs-keyword">if</span> (mainApplicationClass != <span class="hljs-keyword">null</span>) {
-                     step.tag(<span class="hljs-string">&quot;mainApplicationClass&quot;</span>, mainApplicationClass.getName());
-                 }
-             });
+<li>&#x8C03;&#x7528;org.springframework.boot.SpringApplicationRunListeners#environmentPrepared&#x65B9;&#x6CD5;<pre><code class="lang-java"> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">environmentPrepared</span><span class="hljs-params">(ConfigurableBootstrapContext bootstrapContext, ConfigurableEnvironment environment)</span> </span>{
+         doWithListeners(<span class="hljs-string">&quot;spring.boot.application.environment-prepared&quot;</span>,
+                 (listener) -&gt; listener.environmentPrepared(bootstrapContext, environment));
  }
 </code></pre>
 </li>
-<li>&#x904D;&#x5386;SpringApplicationRunListener&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x6267;&#x884C;starting&#x65B9;&#x6CD5;<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doWithListeners</span><span class="hljs-params">(String stepName, Consumer&lt;SpringApplicationRunListener&gt; listenerAction,
+<li>&#x904D;&#x5386;SpringApplicationRunListener&#x96C6;&#x5408;&#xFF0C;&#x6267;&#x884C;environmentPrepared&#x65B9;&#x6CD5;<pre><code class="lang-java"> <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doWithListeners</span><span class="hljs-params">(String stepName, Consumer&lt;SpringApplicationRunListener&gt; listenerAction,
          Consumer&lt;StartupStep&gt; stepAction)</span> </span>{
      StartupStep step = <span class="hljs-keyword">this</span>.applicationStartup.start(stepName);
      <span class="hljs-keyword">this</span>.listeners.forEach(listenerAction);
@@ -434,14 +427,15 @@
  }
 </code></pre>
 </li>
-<li>&#x8C03;&#x7528;org.springframework.boot.context.event.EventPublishingRunListener#starting&#x65B9;&#x6CD5;<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
- <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">starting</span><span class="hljs-params">(ConfigurableBootstrapContext bootstrapContext)</span> </span>{
-     <span class="hljs-keyword">this</span>.initialMulticaster
-             .multicastEvent(<span class="hljs-keyword">new</span> ApplicationStartingEvent(bootstrapContext, <span class="hljs-keyword">this</span>.application, <span class="hljs-keyword">this</span>.args));
+<li>&#x8C03;&#x7528;org.springframework.boot.context.event.EventPublishingRunListener#environmentPrepared&#x65B9;&#x6CD5;<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">environmentPrepared</span><span class="hljs-params">(ConfigurableBootstrapContext bootstrapContext,
+         ConfigurableEnvironment environment)</span> </span>{
+     <span class="hljs-keyword">this</span>.initialMulticaster.multicastEvent(
+             <span class="hljs-keyword">new</span> ApplicationEnvironmentPreparedEvent(bootstrapContext, <span class="hljs-keyword">this</span>.application, <span class="hljs-keyword">this</span>.args, environment));
  }
 </code></pre>
 </li>
-<li><p>&#x4E8B;&#x4EF6;&#x591A;&#x64AD;&#x5668;SimpleApplicationEventMulticaster&#x53D1;&#x5E03;ApplicationStartingEvent&#x4E8B;&#x4EF6;</p>
+<li><p>&#x4E8B;&#x4EF6;&#x591A;&#x64AD;&#x5668;SimpleApplicationEventMulticaster&#x53D1;&#x5E03;ApplicationEnvironmentPreparedEvent&#x4E8B;&#x4EF6;</p>
 <pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">multicastEvent</span><span class="hljs-params">(ApplicationEvent event)</span> </span>{
      multicastEvent(event, resolveDefaultEventType(event));
@@ -462,8 +456,8 @@
  }
 </code></pre>
 </li>
-<li><p>&#x83B7;&#x53D6;&#x4E0E;SpringStartingEvent&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;ApplicationListener&#x76D1;&#x542C;&#x5668;&#x96C6;&#x5408;&#x3002;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">protected</span> Collection&lt;ApplicationListener&lt;?&gt;&gt; getApplicationListeners(
+<li><p>&#x83B7;&#x53D6;&#x4E0E;ApplicationEnvironmentPreparedEvent&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;ApplicationListener&#x76D1;&#x542C;&#x5668;&#x96C6;&#x5408;&#x3002;</p>
+<pre><code class="lang-java"> <span class="hljs-keyword">protected</span> Collection&lt;ApplicationListener&lt;?&gt;&gt; getApplicationListeners(
          ApplicationEvent event, ResolvableType eventType) {
 
      Object source = event.getSource();
@@ -501,7 +495,7 @@
  }
 </code></pre>
 </li>
-<li><p>&#x68C0;&#x7D22;ApplicationStartingEvent&#x4E8B;&#x4EF6;&#x7684;ApplicationListener&#x76D1;&#x542C;&#x5668;</p>
+<li><p>&#x68C0;&#x7D22;ApplicationEnvironmentPreparedEvent&#x4E8B;&#x4EF6;&#x7684;ApplicationListener</p>
 <pre><code class="lang-java"><span class="hljs-keyword">private</span> Collection&lt;ApplicationListener&lt;?&gt;&gt; retrieveApplicationListeners(
          ResolvableType eventType, <span class="hljs-meta">@Nullable</span> Class&lt;?&gt; sourceType, <span class="hljs-meta">@Nullable</span> CachedListenerRetriever retriever) {
 
@@ -607,36 +601,9 @@
      }
  }
 </code></pre>
+<h3 id="applicationstartingevent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;applicationlistener">ApplicationStartingEvent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;ApplicationListener</h3>
 </li>
 </ol>
-<h3 id="applicationstartingevent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;applicationlistener">ApplicationStartingEvent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;ApplicationListener</h3>
-<blockquote>
-<p>LoggingApplicationListener &#x68C0;&#x6D4B;&#x5E76;&#x8FD4;&#x56DE;&#x771F;&#x8BE5;&#x4F7F;&#x7528;&#x7684;&#x65E5;&#x5FD7;&#x7CFB;&#x7EDF;</p>
-</blockquote>
-<pre><code class="lang-java"><span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEvent</span><span class="hljs-params">(ApplicationEvent event)</span> </span>{
-        <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationStartingEvent) {
-            onApplicationStartingEvent((ApplicationStartingEvent) event);
-        }
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationEnvironmentPreparedEvent) {
-            onApplicationEnvironmentPreparedEvent((ApplicationEnvironmentPreparedEvent) event);
-        }
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationPreparedEvent) {
-            onApplicationPreparedEvent((ApplicationPreparedEvent) event);
-        }
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ContextClosedEvent) {
-            onContextClosedEvent((ContextClosedEvent) event);
-        }
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationFailedEvent) {
-            onApplicationFailedEvent();
-        }
-    }
-
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationStartingEvent</span><span class="hljs-params">(ApplicationStartingEvent event)</span> </span>{
-        <span class="hljs-keyword">this</span>.loggingSystem = LoggingSystem.get(event.getSpringApplication().getClassLoader());
-        <span class="hljs-keyword">this</span>.loggingSystem.beforeInitialize();
-    }
-</code></pre>
 
                                 
                                 </section>
@@ -664,14 +631,10 @@
 
             
                 
-                <a href="SpringApplicationRunListeners.html" class="navigation navigation-prev " aria-label="Previous page: 3.获取SpringApplicationRunListeners">
+                <a href="attachConfigurationProperties.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 4.附加属性源"configurationProperties"">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../ch03/run.html" class="navigation navigation-next " aria-label="Next page: 三、创建并配置Enviorment">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -680,7 +643,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4.事件发布：ApplicationStartingEvent","level":"1.3.4","depth":2,"next":{"title":"三、创建并配置Enviorment","level":"1.4","depth":1,"path":"ch03/run.md","ref":"ch03/run.md","articles":[{"title":"1.创建ApplicationArguments","level":"1.4.1","depth":2,"path":"ch03/ApplicationArguments.md","ref":"ch03/ApplicationArguments.md","articles":[]},{"title":"2.获取或者创建ApplicationServletEnvironment","level":"1.4.2","depth":2,"path":"ch03/ApplicationServletEnvironment.md","ref":"ch03/ApplicationServletEnvironment.md","articles":[]},{"title":"3.配置ApplicationServletEnvironment","level":"1.4.3","depth":2,"path":"ch03/configureEnvironment.md","ref":"ch03/configureEnvironment.md","articles":[]},{"title":"4.附加属性源\"configurationProperties\"","level":"1.4.4","depth":2,"path":"ch03/attachConfigurationProperties.md","ref":"ch03/attachConfigurationProperties.md","articles":[]},{"title":"5.事件发布：ApplicationEnvironmentPreparedEvent","level":"1.4.5","depth":2,"path":"ch03/ApplicationEnvironmentPreparedEvent.md","ref":"ch03/ApplicationEnvironmentPreparedEvent.md","articles":[]}]},"previous":{"title":"3.获取SpringApplicationRunListeners","level":"1.3.3","depth":2,"path":"ch02/SpringApplicationRunListeners.md","ref":"ch02/SpringApplicationRunListeners.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch02/ApplicationStartingEvent.md","mtime":"2024-03-28T10:52:51.968Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-28T11:01:44.389Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5.事件发布：ApplicationEnvironmentPreparedEvent","level":"1.4.5","depth":2,"next":{"title":"四、接口详解","level":"1.5","depth":1,"ref":"","articles":[{"title":"1.BootstrapRegistryInitializer接口详解","level":"1.5.1","depth":2,"path":"interface/BootstrapRegistryInitializer.md","ref":"interface/BootstrapRegistryInitializer.md","articles":[]},{"title":"2.BootstrapContext接口详解","level":"1.5.2","depth":2,"path":"interface/BootstrapContext.md","ref":"interface/BootstrapContext.md","articles":[]},{"title":"3.BootstrapRegistry接口详解","level":"1.5.3","depth":2,"path":"interface/BootstrapRegistry.md","ref":"interface/BootstrapRegistry.md","articles":[]}]},"previous":{"title":"4.附加属性源\"configurationProperties\"","level":"1.4.4","depth":2,"path":"ch03/attachConfigurationProperties.md","ref":"ch03/attachConfigurationProperties.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch03/ApplicationEnvironmentPreparedEvent.md","mtime":"2024-03-28T11:01:22.326Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-28T11:01:44.389Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

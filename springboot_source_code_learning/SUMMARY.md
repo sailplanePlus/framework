@@ -15,7 +15,10 @@
     * [3.配置ApplicationServletEnvironment](ch03/configureEnvironment.md)
     * [4.附加属性源"configurationProperties"](ch03/attachConfigurationProperties.md)
     * [5.事件发布：ApplicationEnvironmentPreparedEvent](ch03/ApplicationEnvironmentPreparedEvent.md)
+        * [5.1处理EnvironmentPostProcessor](ch03/EnvironmentPostProcessorApplicationListener.md)
+        * [5.2RandomValuePropertySourceEnvironmentPostProcessor](ch03/RandomValuePropertySourceEnvironmentPostProcessor.md)
 * 四、接口详解
     * [1.BootstrapRegistryInitializer接口详解](interface/BootstrapRegistryInitializer.md)
     * [2.BootstrapContext接口详解](interface/BootstrapContext.md)
     * [3.BootstrapRegistry接口详解](interface/BootstrapRegistry.md)
+    * [4.EnvironmentPostProcessor接口详解](interface/EnvironmentPostProcessor.md)

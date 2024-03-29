@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="EnvironmentPostProcessorApplicationListener.html" />
+    
     
     <link rel="prev" href="attachConfigurationProperties.html" />
     
@@ -293,6 +295,38 @@
             
 
             
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="EnvironmentPostProcessorApplicationListener.html">
+            
+                <a href="EnvironmentPostProcessorApplicationListener.html">
+            
+                    
+                    5.1处理EnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="RandomValuePropertySourceEnvironmentPostProcessor.html">
+            
+                <a href="RandomValuePropertySourceEnvironmentPostProcessor.html">
+            
+                    
+                    5.2RandomValuePropertySourceEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
         </li>
     
 
@@ -346,6 +380,19 @@
             
                     
                     3.BootstrapRegistry接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../interface/EnvironmentPostProcessor.html">
+            
+                <a href="../interface/EnvironmentPostProcessor.html">
+            
+                    
+                    4.EnvironmentPostProcessor接口详解
             
                 </a>
             
@@ -601,7 +648,147 @@
      }
  }
 </code></pre>
-<h3 id="applicationstartingevent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;applicationlistener">ApplicationStartingEvent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;ApplicationListener</h3>
+</li>
+</ol>
+<h3 id="applicationenvironmentpreparedevent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;applicationlistener">ApplicationEnvironmentPreparedEvent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;ApplicationListener</h3>
+<ol>
+<li><p><strong>EnvironmentPostProcessorApplicationListener</strong>&#xFF0C;&#x7528;&#x4E8E;&#x89E6;&#x53D1;&#x5728;spring.factories&#x6587;&#x4EF6;&#x4E2D;&#x6CE8;&#x518C;&#x7684;EnvironmentPostProcessor&#x3002;</p>
+<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEvent</span><span class="hljs-params">(ApplicationEvent event)</span> </span>{
+     <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationEnvironmentPreparedEvent) {
+         onApplicationEnvironmentPreparedEvent((ApplicationEnvironmentPreparedEvent) event);
+     }
+     <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationPreparedEvent) {
+         onApplicationPreparedEvent();
+     }
+     <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationFailedEvent) {
+         onApplicationFailedEvent();
+     }
+ }
+
+ <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEnvironmentPreparedEvent</span><span class="hljs-params">(ApplicationEnvironmentPreparedEvent event)</span> </span>{
+     ConfigurableEnvironment environment = event.getEnvironment();
+     SpringApplication application = event.getSpringApplication();
+     <span class="hljs-keyword">for</span> (EnvironmentPostProcessor postProcessor : getEnvironmentPostProcessors(application.getResourceLoader(),
+             event.getBootstrapContext())) {
+         postProcessor.postProcessEnvironment(environment, application);
+     }
+ }
+</code></pre>
+<blockquote>
+<p>&#x8FD9;&#x4E2A;&#x76D1;&#x542C;&#x5668;&#x5F88;&#x91CD;&#x8981;&#xFF0C;&#x5B8C;&#x6210;&#x4E86;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x52A0;&#x8F7D;&#x5DE5;&#x4F5C;&#xFF0C;&#x540E;&#x7EED;&#x4E13;&#x95E8;&#x9488;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>AnsiOutputApplicationListener&#xFF0C;&#x6839;&#x636E;&#x5C5E;&#x6027;spring.output.ansi.enabled&#x7684;&#x503C;&#x914D;&#x7F6E;AnsiOutput</p>
+<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEvent</span><span class="hljs-params">(ApplicationEnvironmentPreparedEvent event)</span> </span>{
+     ConfigurableEnvironment environment = event.getEnvironment();
+     Binder.get(environment).bind(<span class="hljs-string">&quot;spring.output.ansi.enabled&quot;</span>, AnsiOutput.Enabled.class)
+             .ifBound(AnsiOutput::setEnabled);
+     AnsiOutput.setConsoleAvailable(environment.getProperty(<span class="hljs-string">&quot;spring.output.ansi.console-available&quot;</span>, Boolean.class));
+ }
+</code></pre>
+</li>
+<li><p>LoggingApplicationListener</p>
+<pre><code class="lang-java"><span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEvent</span><span class="hljs-params">(ApplicationEvent event)</span> </span>{
+     <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationStartingEvent) {
+         onApplicationStartingEvent((ApplicationStartingEvent) event);
+     }
+     <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationEnvironmentPreparedEvent) {
+         onApplicationEnvironmentPreparedEvent((ApplicationEnvironmentPreparedEvent) event);
+     }
+     <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationPreparedEvent) {
+         onApplicationPreparedEvent((ApplicationPreparedEvent) event);
+     }
+     <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ContextClosedEvent) {
+         onContextClosedEvent((ContextClosedEvent) event);
+     }
+     <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationFailedEvent) {
+         onApplicationFailedEvent();
+     }
+ }
+
+     <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEnvironmentPreparedEvent</span><span class="hljs-params">(ApplicationEnvironmentPreparedEvent event)</span> </span>{
+     SpringApplication springApplication = event.getSpringApplication();
+     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.loggingSystem == <span class="hljs-keyword">null</span>) {
+         <span class="hljs-keyword">this</span>.loggingSystem = LoggingSystem.get(springApplication.getClassLoader());
+     }
+     initialize(event.getEnvironment(), springApplication.getClassLoader());
+ }
+</code></pre>
+</li>
+<li><p>BackgroundPreinitializer&#xFF0C;&#x7528;&#x4E8E;&#x5728;&#x540E;&#x53F0;&#x7EBF;&#x7A0B;&#x4E2D;&#x89E6;&#x53D1;&#x8017;&#x65F6;&#x4EFB;&#x52A1;&#x7684;&#x65E9;&#x671F;&#x521D;&#x59CB;&#x5316;&#x3002;
+&#x5C06;IGNORE_BACKGROUNDPREINITIALIZER_PROPERTY_NAME&#x7CFB;&#x7EDF;&#x5C5E;&#x6027;&#x8BBE;&#x7F6E;&#x4E3A;true&#x4EE5;&#x7981;&#x7528;&#x6B64;&#x673A;&#x5236;&#xFF0C;&#x5E76;&#x8BA9;&#x6B64;&#x7C7B;&#x521D;&#x59CB;&#x5316;&#x5728;&#x524D;&#x53F0;&#x4E2D;&#x8FDB;&#x884C;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEvent</span><span class="hljs-params">(SpringApplicationEvent event)</span> </span>{
+     <span class="hljs-keyword">if</span> (!ENABLED) {
+         <span class="hljs-keyword">return</span>;
+     }
+     <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationEnvironmentPreparedEvent
+             &amp;&amp; preinitializationStarted.compareAndSet(<span class="hljs-keyword">false</span>, <span class="hljs-keyword">true</span>)) {
+         performPreinitialization();
+     }
+     <span class="hljs-keyword">if</span> ((event <span class="hljs-keyword">instanceof</span> ApplicationReadyEvent || event <span class="hljs-keyword">instanceof</span> ApplicationFailedEvent)
+             &amp;&amp; preinitializationStarted.get()) {
+         <span class="hljs-keyword">try</span> {
+             preinitializationComplete.await();
+         }
+         <span class="hljs-keyword">catch</span> (InterruptedException ex) {
+             Thread.currentThread().interrupt();
+         }
+     }
+ }
+</code></pre>
+</li>
+<li>DelegatingApplicationListener&#xFF0C;&#x59D4;&#x6258;&#x7ED9;&#x5728;context.listener.classes&#x73AF;&#x5883;&#x5C5E;&#x6027;&#x4E0B;&#x6307;&#x5B9A;&#x7684;&#x5176;&#x4ED6;&#x4FA6;&#x542C;&#x5668;&#x3002;<blockquote>
+<p>&#x5224;&#x65AD;&#x662F;&#x5426;&#x914D;&#x7F6E;&#x73AF;&#x5883;&#x5C5E;&#x6027;context.listener.classes&#xFF0C;&#x5982;&#x679C;&#x914D;&#x7F6E;&#x4E86;&#xFF0C;&#x5B9E;&#x4F8B;&#x5316;&#x5B83;&#x4EEC;&#x3002;&#x5982;&#x679C;&#x914D;&#x7F6E;&#x4E86;&#x5176;&#x4ED6;&#x76D1;&#x542C;&#x5668;ApplicationListener&#xFF0C;&#x5219;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;SimpleApplicationEventMulticaster&#x4E8B;&#x4EF6;&#x591A;&#x64AD;&#x5668;&#xFF0C;&#x5C06;&#x8FD9;&#x4E9B;ApplicationListener&#x6DFB;&#x52A0;&#x5230;&#x4E8B;&#x4EF6;&#x68C0;&#x7D22;&#x96C6;&#x5408;&#x4E2D;&#x3002;&#x7136;&#x540E;&#x53D1;&#x5E03;ApplicationEnvironmentPreparedEvent&#x4E8B;&#x4EF6;</p>
+<pre><code class="lang-java"><span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEvent</span><span class="hljs-params">(ApplicationEvent event)</span> </span>{
+     <span class="hljs-keyword">if</span> (event <span class="hljs-keyword">instanceof</span> ApplicationEnvironmentPreparedEvent) {
+         List&lt;ApplicationListener&lt;ApplicationEvent&gt;&gt; delegates = getListeners(
+                 ((ApplicationEnvironmentPreparedEvent) event).getEnvironment());
+         <span class="hljs-keyword">if</span> (delegates.isEmpty()) {
+             <span class="hljs-keyword">return</span>;
+         }
+         <span class="hljs-keyword">this</span>.multicaster = <span class="hljs-keyword">new</span> SimpleApplicationEventMulticaster();
+         <span class="hljs-keyword">for</span> (ApplicationListener&lt;ApplicationEvent&gt; listener : delegates) {
+             <span class="hljs-keyword">this</span>.multicaster.addApplicationListener(listener);
+         }
+     }
+     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.multicaster != <span class="hljs-keyword">null</span>) {
+         <span class="hljs-keyword">this</span>.multicaster.multicastEvent(event);
+     }
+ }
+</code></pre>
+</blockquote>
+</li>
+<li>FileEncodingApplicationListener<blockquote>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;ApplicationListener&#xFF0C;&#x5982;&#x679C;&#x7CFB;&#x7EDF;&#x6587;&#x4EF6;&#x7F16;&#x7801;&#x4E0E;&#x73AF;&#x5883;&#x4E2D;&#x8BBE;&#x7F6E;&#x7684;&#x9884;&#x671F;&#x503C;&#x4E0D;&#x5339;&#x914D;&#xFF0C;&#x5219;&#x4F1A;&#x963B;&#x6B62;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5B83;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x6548;&#x679C;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x60A8;&#x5C06;spring.mandatory_file_encoding&#xFF08;&#x6216;&#x8BE5;&#x540D;&#x79F0;&#x7684;&#x4E00;&#x4E9B;&#x9A7C;&#x5CF0;&#x6216;&#x5927;&#x5199;&#x53D8;&#x4F53;&#xFF09;&#x8BBE;&#x7F6E;&#x4E3A;&#x5B57;&#x7B26;&#x7F16;&#x7801;&#x7684;&#x540D;&#x79F0;&#xFF08;&#x4F8B;&#x5982;&quot;UTF-8&quot;&#xFF09;&#xFF0C;&#x5219;&#x6B64;&#x521D;&#x59CB;&#x5316;&#x7A0B;&#x5E8F;&#x5728;file.encoding&#x7CFB;&#x7EDF;&#x5C5E;&#x6027;&#x4E0D;&#x7B49;&#x4E8E;&#x5B83;&#x65F6;&#x4F1A;&#x5F15;&#x53D1;&#x5F02;&#x5E38;&#x3002;
+&#x7CFB;&#x7EDF;&#x5C5E;&#x6027;file.encoding&#x901A;&#x5E38;&#x7531;JVM&#x6839;&#x636E;LANG&#x6216;LC_ALL&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x8BBE;&#x7F6E;&#x3002;&#x5B83;&#x7528;&#x4E8E;&#xFF08;&#x4E0E;&#x5176;&#x4ED6;&#x4F9D;&#x8D56;&#x4E8E;&#x8FD9;&#x4E9B;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x5E73;&#x53F0;&#x76F8;&#x5173;&#x53D8;&#x91CF;&#x4E00;&#x8D77;&#xFF09;&#x5BF9;JVM&#x53C2;&#x6570;&#x4EE5;&#x53CA;&#x6587;&#x4EF6;&#x540D;&#x548C;&#x8DEF;&#x5F84;&#x8FDB;&#x884C;&#x7F16;&#x7801;&#x3002;&#x5728;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E0A;&#xFF08;&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x7684;JVM&#x529F;&#x80FD;&#xFF09;&#x8986;&#x76D6;&#x6587;&#x4EF6;&#x7F16;&#x7801;&#x7CFB;&#x7EDF;&#x5C5E;&#x6027;&#xFF0C;&#x4F46;&#x4E5F;&#x8003;&#x8651;&#x5C06;LANG&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x8BBE;&#x7F6E;&#x4E3A;&#x663E;&#x5F0F;&#x7684;&#x5B57;&#x7B26;&#x7F16;&#x7801;&#x503C;&#xFF08;&#x4F8B;&#x5982;&quot;en_GB.UTF-8&quot;&#xFF09;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEvent</span><span class="hljs-params">(ApplicationEnvironmentPreparedEvent event)</span> </span>{
+     ConfigurableEnvironment environment = event.getEnvironment();
+     String desired = environment.getProperty(<span class="hljs-string">&quot;spring.mandatory-file-encoding&quot;</span>);
+     <span class="hljs-keyword">if</span> (desired == <span class="hljs-keyword">null</span>) {
+         <span class="hljs-keyword">return</span>;
+     }
+     String encoding = System.getProperty(<span class="hljs-string">&quot;file.encoding&quot;</span>);
+     <span class="hljs-keyword">if</span> (encoding != <span class="hljs-keyword">null</span> &amp;&amp; !desired.equalsIgnoreCase(encoding)) {
+         <span class="hljs-keyword">if</span> (logger.isErrorEnabled()) {
+             logger.error(<span class="hljs-string">&quot;System property &apos;file.encoding&apos; is currently &apos;&quot;</span> + encoding + <span class="hljs-string">&quot;&apos;. It should be &apos;&quot;</span> + desired
+                     + <span class="hljs-string">&quot;&apos; (as defined in &apos;spring.mandatoryFileEncoding&apos;).&quot;</span>);
+             logger.error(<span class="hljs-string">&quot;Environment variable LANG is &apos;&quot;</span> + System.getenv(<span class="hljs-string">&quot;LANG&quot;</span>)
+                     + <span class="hljs-string">&quot;&apos;. You could use a locale setting that matches encoding=&apos;&quot;</span> + desired + <span class="hljs-string">&quot;&apos;.&quot;</span>);
+             logger.error(<span class="hljs-string">&quot;Environment variable LC_ALL is &apos;&quot;</span> + System.getenv(<span class="hljs-string">&quot;LC_ALL&quot;</span>)
+                     + <span class="hljs-string">&quot;&apos;. You could use a locale setting that matches encoding=&apos;&quot;</span> + desired + <span class="hljs-string">&quot;&apos;.&quot;</span>);
+         }
+         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(<span class="hljs-string">&quot;The Java Virtual Machine has not been configured to use the &quot;</span>
+                 + <span class="hljs-string">&quot;desired default character encoding (&quot;</span> + desired + <span class="hljs-string">&quot;).&quot;</span>);
+     }
+ }
+</code></pre>
+</blockquote>
 </li>
 </ol>
 
@@ -631,10 +818,14 @@
 
             
                 
-                <a href="attachConfigurationProperties.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 4.附加属性源"configurationProperties"">
+                <a href="attachConfigurationProperties.html" class="navigation navigation-prev " aria-label="Previous page: 4.附加属性源"configurationProperties"">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="EnvironmentPostProcessorApplicationListener.html" class="navigation navigation-next " aria-label="Next page: 5.1处理EnvironmentPostProcessor">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -643,7 +834,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5.事件发布：ApplicationEnvironmentPreparedEvent","level":"1.4.5","depth":2,"next":{"title":"四、接口详解","level":"1.5","depth":1,"ref":"","articles":[{"title":"1.BootstrapRegistryInitializer接口详解","level":"1.5.1","depth":2,"path":"interface/BootstrapRegistryInitializer.md","ref":"interface/BootstrapRegistryInitializer.md","articles":[]},{"title":"2.BootstrapContext接口详解","level":"1.5.2","depth":2,"path":"interface/BootstrapContext.md","ref":"interface/BootstrapContext.md","articles":[]},{"title":"3.BootstrapRegistry接口详解","level":"1.5.3","depth":2,"path":"interface/BootstrapRegistry.md","ref":"interface/BootstrapRegistry.md","articles":[]}]},"previous":{"title":"4.附加属性源\"configurationProperties\"","level":"1.4.4","depth":2,"path":"ch03/attachConfigurationProperties.md","ref":"ch03/attachConfigurationProperties.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch03/ApplicationEnvironmentPreparedEvent.md","mtime":"2024-03-28T11:01:22.326Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-28T11:01:44.389Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5.事件发布：ApplicationEnvironmentPreparedEvent","level":"1.4.5","depth":2,"next":{"title":"5.1处理EnvironmentPostProcessor","level":"1.4.5.1","depth":3,"path":"ch03/EnvironmentPostProcessorApplicationListener.md","ref":"ch03/EnvironmentPostProcessorApplicationListener.md","articles":[]},"previous":{"title":"4.附加属性源\"configurationProperties\"","level":"1.4.4","depth":2,"path":"ch03/attachConfigurationProperties.md","ref":"ch03/attachConfigurationProperties.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch03/ApplicationEnvironmentPreparedEvent.md","mtime":"2024-03-29T08:02:27.265Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-29T11:18:05.233Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

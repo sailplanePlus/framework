@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>2.获取或者创建ApplicationServletEnvironment · GitBook</title>
+        <title>5.1处理EnvironmentPostProcessor · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="configureEnvironment.html" />
+    <link rel="next" href="RandomValuePropertySourceEnvironmentPostProcessor.html" />
     
     
-    <link rel="prev" href="ApplicationArguments.html" />
+    <link rel="prev" href="ApplicationEnvironmentPreparedEvent.html" />
     
 
     </head>
@@ -245,7 +245,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4.2" data-path="ApplicationServletEnvironment.html">
+        <li class="chapter " data-level="1.4.2" data-path="ApplicationServletEnvironment.html">
             
                 <a href="ApplicationServletEnvironment.html">
             
@@ -298,7 +298,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.5.1" data-path="EnvironmentPostProcessorApplicationListener.html">
+        <li class="chapter active" data-level="1.4.5.1" data-path="EnvironmentPostProcessorApplicationListener.html">
             
                 <a href="EnvironmentPostProcessorApplicationListener.html">
             
@@ -435,7 +435,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >2.获取或者创建ApplicationServletEnvironment</a>
+        <a href=".." >5.1处理EnvironmentPostProcessor</a>
     </h1>
 </div>
 
@@ -450,60 +450,67 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x83B7;&#x53D6;&#x6216;&#x8005;&#x521B;&#x5EFA;&#x73AF;&#x5883;&#x5BF9;&#x8C61;configurableenvironment">&#x83B7;&#x53D6;&#x6216;&#x8005;&#x521B;&#x5EFA;&#x73AF;&#x5883;&#x5BF9;&#x8C61;ConfigurableEnvironment</h1>
-<pre><code class="lang-java">    ConfigurableEnvironment environment = getOrCreateEnvironment();
-</code></pre>
-<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">private</span> ConfigurableEnvironment <span class="hljs-title">getOrCreateEnvironment</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.environment != <span class="hljs-keyword">null</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.environment;
-        }
-        <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">this</span>.webApplicationType) {
-            <span class="hljs-keyword">case</span> SERVLET:
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ApplicationServletEnvironment();
-            <span class="hljs-keyword">case</span> REACTIVE:
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ApplicationReactiveWebEnvironment();
-            <span class="hljs-keyword">default</span>:
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ApplicationEnvironment();
-        }
-    }
-</code></pre>
-<h3 id="&#x4E00;&#x3001;&#x901A;&#x8FC7;&#x6211;&#x4EEC;&#x7684;webapplicationtype&#x5224;&#x65AD;&#xFF0C;&#x901A;&#x8FC7;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;applicationservletenvironment">&#x4E00;&#x3001;&#x901A;&#x8FC7;&#x6211;&#x4EEC;&#x7684;webApplicationType&#x5224;&#x65AD;&#xFF0C;&#x901A;&#x8FC7;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;ApplicationServletEnvironment</h3>
-<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AbstractEnvironment</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">this</span>(<span class="hljs-keyword">new</span> MutablePropertySources());
-    }
-</code></pre>
-<h3 id="&#x4E8C;&#x3001;&#x6784;&#x9020;&#x8FC7;&#x7A0B;&#x4E2D;&#x56DE;&#x8C03;customizepropertysourcespropertysouces&#xFF0C;&#x4EE5;&#x5141;&#x8BB8;&#x5B50;&#x7C7B;&#x6839;&#x636E;&#x9700;&#x8981;&#x64CD;&#x4F5C;propertysources&#x5B9E;&#x4F8B;&#x3002;">&#x4E8C;&#x3001;&#x6784;&#x9020;&#x8FC7;&#x7A0B;&#x4E2D;&#x56DE;&#x8C03;customizePropertySources(propertySouces)&#xFF0C;&#x4EE5;&#x5141;&#x8BB8;&#x5B50;&#x7C7B;&#x6839;&#x636E;&#x9700;&#x8981;&#x64CD;&#x4F5C;PropertySources&#x5B9E;&#x4F8B;&#x3002;</h3>
-<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">AbstractEnvironment</span><span class="hljs-params">(MutablePropertySources propertySources)</span> </span>{
-            <span class="hljs-keyword">this</span>.propertySources = propertySources;
-            <span class="hljs-keyword">this</span>.propertyResolver = createPropertyResolver(propertySources);
-            customizePropertySources(propertySources);
-    }
-</code></pre>
+                                <h1 id="&#x89E6;&#x53D1;springfactories&#x6587;&#x4EF6;&#x4E2D;&#x6CE8;&#x518C;&#x7684;environmentpostprocessor">&#x89E6;&#x53D1;spring.factories&#x6587;&#x4EF6;&#x4E2D;&#x6CE8;&#x518C;&#x7684;EnvironmentPostProcessor</h1>
 <ol>
-<li>&#x521B;&#x5EFA;&#x5C5E;&#x6027;&#x89E3;&#x6790;&#x5668;ConfigurationPropertySourcesPropertyResolver<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
- <span class="hljs-function"><span class="hljs-keyword">protected</span> ConfigurablePropertyResolver <span class="hljs-title">createPropertyResolver</span><span class="hljs-params">(MutablePropertySources propertySources)</span> </span>{
-     <span class="hljs-keyword">return</span> ConfigurationPropertySources.createPropertyResolver(propertySources);
- }
-</code></pre>
-2.&#x56DE;&#x8C03;customizePropertySources(propertySources)&#x65B9;&#x6CD5;<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
- <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">customizePropertySources</span><span class="hljs-params">(MutablePropertySources propertySources)</span> </span>{
-     propertySources.addLast(<span class="hljs-keyword">new</span> StubPropertySource(SERVLET_CONFIG_PROPERTY_SOURCE_NAME));
-     propertySources.addLast(<span class="hljs-keyword">new</span> StubPropertySource(SERVLET_CONTEXT_PROPERTY_SOURCE_NAME));
-     <span class="hljs-keyword">if</span> (jndiPresent &amp;&amp; JndiLocatorDelegate.isDefaultJndiEnvironmentAvailable()) {
-         propertySources.addLast(<span class="hljs-keyword">new</span> JndiPropertySource(JNDI_PROPERTY_SOURCE_NAME));
+<li><p>&#x76D1;&#x542C;&#x5668;EnvironmentPostProcessorApplicationListener&#x5904;&#x7406;ApplicationEnvironmentPreparedEvent&#x4E8B;&#x4EF6;</p>
+<pre><code class="lang-java"> <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onApplicationEnvironmentPreparedEvent</span><span class="hljs-params">(ApplicationEnvironmentPreparedEvent event)</span> </span>{
+     ConfigurableEnvironment environment = event.getEnvironment();
+     SpringApplication application = event.getSpringApplication();
+     <span class="hljs-keyword">for</span> (EnvironmentPostProcessor postProcessor : getEnvironmentPostProcessors(application.getResourceLoader(),
+             event.getBootstrapContext())) {
+         postProcessor.postProcessEnvironment(environment, application);
      }
-     <span class="hljs-keyword">super</span>.customizePropertySources(propertySources);
  }
 </code></pre>
-&#x8BBE;&#x7F6E;propertySouce</li>
-<li>servletContextInitParams</li>
-<li>servletConfigInitParams</li>
-<li>systemProperties</li>
-<li>systemEnvironment<blockquote>
-<p>&#x6CE8;&#x610F;Servlet&#x76F8;&#x5173;&#x7684;&#x5C5E;&#x6027;&#x6E90;&#x5728;&#x8FD9;&#x4E2A;&#x9636;&#x6BB5;&#x53EA;&#x662F;&#x88AB;&#x6DFB;&#x52A0;&#x4E3A;&#x5B58;&#x6839;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x5C06;&#x5177;&#x4F53;&#x7684;&#x5C5E;&#x6027;&#x6DFB;&#x52A0;&#x8FDB;&#x6765;</p>
-</blockquote>
+</li>
+<li><p>&#x83B7;&#x53D6;EnvironmentPostProcessor</p>
+<pre><code class="lang-java"> <span class="hljs-function">List&lt;EnvironmentPostProcessor&gt; <span class="hljs-title">getEnvironmentPostProcessors</span><span class="hljs-params">(ResourceLoader resourceLoader,
+         ConfigurableBootstrapContext bootstrapContext)</span> </span>{
+     ClassLoader classLoader = (resourceLoader != <span class="hljs-keyword">null</span>) ? resourceLoader.getClassLoader() : <span class="hljs-keyword">null</span>;
+     EnvironmentPostProcessorsFactory postProcessorsFactory = <span class="hljs-keyword">this</span>.postProcessorsFactory.apply(classLoader);
+     <span class="hljs-keyword">return</span> postProcessorsFactory.getEnvironmentPostProcessors(<span class="hljs-keyword">this</span>.deferredLogs, bootstrapContext);
+ }
+</code></pre>
+</li>
+<li><p>&#x521B;&#x5EFA;EnvironmentPostProcessorsFactory&#xFF0C;&#x7528;&#x6765;&#x521B;&#x5EFA;EnvironmentPostProcessor</p>
+<pre><code class="lang-java"> <span class="hljs-function"><span class="hljs-keyword">static</span> EnvironmentPostProcessorsFactory <span class="hljs-title">fromSpringFactories</span><span class="hljs-params">(ClassLoader classLoader)</span> </span>{
+     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ReflectionEnvironmentPostProcessorsFactory(classLoader,
+             SpringFactoriesLoader.loadFactoryNames(EnvironmentPostProcessor.class, classLoader));
+ }
+</code></pre>
+</li>
+<li><p>&#x7531;EnvironmentPostProcessorsFactory&#x5BF9;EnvironmentPostProcessor&#x8FDB;&#x884C;&#x5B9E;&#x4F8B;&#x5316;</p>
+<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;EnvironmentPostProcessor&gt; <span class="hljs-title">getEnvironmentPostProcessors</span><span class="hljs-params">(DeferredLogFactory logFactory,
+         ConfigurableBootstrapContext bootstrapContext)</span> </span>{
+     Instantiator&lt;EnvironmentPostProcessor&gt; instantiator = <span class="hljs-keyword">new</span> Instantiator&lt;&gt;(EnvironmentPostProcessor.class,
+             (parameters) -&gt; {
+                 parameters.add(DeferredLogFactory.class, logFactory);
+                 parameters.add(Log.class, logFactory::getLog);
+                 parameters.add(ConfigurableBootstrapContext.class, bootstrapContext);
+                 parameters.add(BootstrapContext.class, bootstrapContext);
+                 parameters.add(BootstrapRegistry.class, bootstrapContext);
+             });
+     <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span>.classes != <span class="hljs-keyword">null</span>) ? instantiator.instantiateTypes(<span class="hljs-keyword">this</span>.classes)
+             : instantiator.instantiate(<span class="hljs-keyword">this</span>.classLoader, <span class="hljs-keyword">this</span>.classNames);
+ }
+</code></pre>
+<p>5.&#x83B7;&#x53D6;spring.factories&#x4E2D;&#x7684;EnvironmentPostProcessor&#xFF0C;&#x5BF9;&#x7ED9;&#x5B9A;&#x7684;&#x73AF;&#x5883;&#x8FDB;&#x884C;&#x540E;&#x5904;&#x7406;</p>
+<pre><code class="lang-java">postProcessor.postProcessEnvironment(environment, application);
+</code></pre>
 </li>
 </ol>
+<blockquote>
+<h3 id="springfactories&#x6587;&#x4EF6;&#x4E2D;&#x6709;&#x914D;&#x7F6E;&#x4E86;&#x5982;&#x4E0B;environmentpostprocessor">spring.factories&#x6587;&#x4EF6;&#x4E2D;&#x6709;&#x914D;&#x7F6E;&#x4E86;&#x5982;&#x4E0B;EnvironmentPostProcessor</h3>
+<p>org.springframework.boot.env.EnvironmentPostProcessor=\
+org.springframework.boot.cloud.CloudFoundryVcapEnvironmentPostProcessor,\
+org.springframework.boot.context.config.ConfigDataEnvironmentPostProcessor,\
+org.springframework.boot.env.RandomValuePropertySourceEnvironmentPostProcessor,\
+org.springframework.boot.env.SpringApplicationJsonEnvironmentPostProcessor,\
+org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor,\
+org.springframework.boot.reactor.DebugAgentEnvironmentPostProcessor</p>
+<p>&#x540E;&#x7EED;&#x7BC7;&#x7AE0;&#x5C06;&#x5206;&#x522B;&#x4ECB;&#x7ECD;&#x6BCF;&#x4E2A;EnvironmentPostProcessor&#x7684;&#x4F5C;&#x7528;</p>
+</blockquote>
 
                                 
                                 </section>
@@ -531,12 +538,12 @@
 
             
                 
-                <a href="ApplicationArguments.html" class="navigation navigation-prev " aria-label="Previous page: 1.创建ApplicationArguments">
+                <a href="ApplicationEnvironmentPreparedEvent.html" class="navigation navigation-prev " aria-label="Previous page: 5.事件发布：ApplicationEnvironmentPreparedEvent">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="configureEnvironment.html" class="navigation navigation-next " aria-label="Next page: 3.配置ApplicationServletEnvironment">
+                <a href="RandomValuePropertySourceEnvironmentPostProcessor.html" class="navigation navigation-next " aria-label="Next page: 5.2RandomValuePropertySourceEnvironmentPostProcessor">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -547,7 +554,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.获取或者创建ApplicationServletEnvironment","level":"1.4.2","depth":2,"next":{"title":"3.配置ApplicationServletEnvironment","level":"1.4.3","depth":2,"path":"ch03/configureEnvironment.md","ref":"ch03/configureEnvironment.md","articles":[]},"previous":{"title":"1.创建ApplicationArguments","level":"1.4.1","depth":2,"path":"ch03/ApplicationArguments.md","ref":"ch03/ApplicationArguments.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch03/ApplicationServletEnvironment.md","mtime":"2024-03-28T06:54:12.025Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-29T11:18:05.233Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5.1处理EnvironmentPostProcessor","level":"1.4.5.1","depth":3,"next":{"title":"5.2RandomValuePropertySourceEnvironmentPostProcessor","level":"1.4.5.2","depth":3,"path":"ch03/RandomValuePropertySourceEnvironmentPostProcessor.md","ref":"ch03/RandomValuePropertySourceEnvironmentPostProcessor.md","articles":[]},"previous":{"title":"5.事件发布：ApplicationEnvironmentPreparedEvent","level":"1.4.5","depth":2,"path":"ch03/ApplicationEnvironmentPreparedEvent.md","ref":"ch03/ApplicationEnvironmentPreparedEvent.md","articles":[{"title":"5.1处理EnvironmentPostProcessor","level":"1.4.5.1","depth":3,"path":"ch03/EnvironmentPostProcessorApplicationListener.md","ref":"ch03/EnvironmentPostProcessorApplicationListener.md","articles":[]},{"title":"5.2RandomValuePropertySourceEnvironmentPostProcessor","level":"1.4.5.2","depth":3,"path":"ch03/RandomValuePropertySourceEnvironmentPostProcessor.md","ref":"ch03/RandomValuePropertySourceEnvironmentPostProcessor.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch03/EnvironmentPostProcessorApplicationListener.md","mtime":"2024-03-29T09:39:27.190Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-29T11:18:05.233Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

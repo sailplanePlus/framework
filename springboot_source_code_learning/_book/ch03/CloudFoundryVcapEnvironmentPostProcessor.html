@@ -1,0 +1,702 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>5.5CloudFoundryVcapEnvironmentPostProcessor · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ConfigDataEnvironmentPostProcessor.html" />
+    
+    
+    <link rel="prev" href="SpringApplicationJsonEnvironmentPostProcessor.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    一、关于SpringApplication
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch01/什么是SpringApplication.html">
+            
+                <a href="../ch01/什么是SpringApplication.html">
+            
+                    
+                    1.什么是SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch01/创建SpringApplication.html">
+            
+                <a href="../ch01/创建SpringApplication.html">
+            
+                    
+                    2.创建SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch02/run.html">
+            
+                <a href="../ch02/run.html">
+            
+                    
+                    二、启动SpringApplication
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch02/DefaultBootstrapContext.html">
+            
+                <a href="../ch02/DefaultBootstrapContext.html">
+            
+                    
+                    1.创建引导上下文DefaultBootstrapContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch02/systemProperty.html">
+            
+                <a href="../ch02/systemProperty.html">
+            
+                    
+                    2.设置系统属性java.awt.headless
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch02/SpringApplicationRunListeners.html">
+            
+                <a href="../ch02/SpringApplicationRunListeners.html">
+            
+                    
+                    3.获取SpringApplicationRunListeners
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch02/ApplicationStartingEvent.html">
+            
+                <a href="../ch02/ApplicationStartingEvent.html">
+            
+                    
+                    4.事件发布：ApplicationStartingEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="run.html">
+            
+                <a href="run.html">
+            
+                    
+                    三、创建并配置Enviorment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="ApplicationArguments.html">
+            
+                <a href="ApplicationArguments.html">
+            
+                    
+                    1.创建ApplicationArguments
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ApplicationServletEnvironment.html">
+            
+                <a href="ApplicationServletEnvironment.html">
+            
+                    
+                    2.获取或者创建ApplicationServletEnvironment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="configureEnvironment.html">
+            
+                <a href="configureEnvironment.html">
+            
+                    
+                    3.配置ApplicationServletEnvironment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="attachConfigurationProperties.html">
+            
+                <a href="attachConfigurationProperties.html">
+            
+                    
+                    4.附加属性源"configurationProperties"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="ApplicationEnvironmentPreparedEvent.html">
+            
+                <a href="ApplicationEnvironmentPreparedEvent.html">
+            
+                    
+                    5.事件发布：ApplicationEnvironmentPreparedEvent
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="EnvironmentPostProcessorApplicationListener.html">
+            
+                <a href="EnvironmentPostProcessorApplicationListener.html">
+            
+                    
+                    5.1处理EnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="RandomValuePropertySourceEnvironmentPostProcessor.html">
+            
+                <a href="RandomValuePropertySourceEnvironmentPostProcessor.html">
+            
+                    
+                    5.2RandomValuePropertySourceEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.3" data-path="SystemEnvironmentPropertySourceEnvironmentPostProcessor.html">
+            
+                <a href="SystemEnvironmentPropertySourceEnvironmentPostProcessor.html">
+            
+                    
+                    5.3SystemEnvironmentPropertySourceEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.4" data-path="SpringApplicationJsonEnvironmentPostProcessor.html">
+            
+                <a href="SpringApplicationJsonEnvironmentPostProcessor.html">
+            
+                    
+                    5.4SpringApplicationJsonEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.5.5" data-path="CloudFoundryVcapEnvironmentPostProcessor.html">
+            
+                <a href="CloudFoundryVcapEnvironmentPostProcessor.html">
+            
+                    
+                    5.5CloudFoundryVcapEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.6" data-path="ConfigDataEnvironmentPostProcessor.html">
+            
+                <a href="ConfigDataEnvironmentPostProcessor.html">
+            
+                    
+                    5.6ConfigDataEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.7" data-path="DebugAgentEnvironmentPostProcessor.html">
+            
+                <a href="DebugAgentEnvironmentPostProcessor.html">
+            
+                    
+                    5.7DebugAgentEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.8" data-path="IntegrationPropertiesEnvironmentPostProcessor.html">
+            
+                <a href="IntegrationPropertiesEnvironmentPostProcessor.html">
+            
+                    
+                    5.8IntegrationPropertiesEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="environmentAfter.html">
+            
+                <a href="environmentAfter.html">
+            
+                    
+                    6.Environment后续处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="printBanner.html">
+            
+                <a href="printBanner.html">
+            
+                    
+                    7.打印Banner
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch04/run.html">
+            
+                <a href="../ch04/run.html">
+            
+                    
+                    四、准备ApplicationContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    五、接口详解
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../interface/BootstrapRegistryInitializer.html">
+            
+                <a href="../interface/BootstrapRegistryInitializer.html">
+            
+                    
+                    1.BootstrapRegistryInitializer接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../interface/BootstrapContext.html">
+            
+                <a href="../interface/BootstrapContext.html">
+            
+                    
+                    2.BootstrapContext接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../interface/BootstrapRegistry.md">
+            
+                <span>
+            
+                    
+                    3.BootstrapRegistry接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../interface/EnvironmentPostProcessor.html">
+            
+                <a href="../interface/EnvironmentPostProcessor.html">
+            
+                    
+                    4.EnvironmentPostProcessor接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >5.5CloudFoundryVcapEnvironmentPostProcessor</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="cloundfoundryvcapenvironmentpostprocessor-&#x6DFB;&#x52A0;vcap&#x5C5E;&#x6027;&#x6E90;">CloundFoundryVcapEnvironmentPostProcessor &#x6DFB;&#x52A0;&quot;vcap&quot;&#x5C5E;&#x6027;&#x6E90;</h1>
+<blockquote>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;EnvironmentPostProcessor&#xFF0C;&#x5B83;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x5728;&#x73B0;&#x6709;&#x73AF;&#x5883;&#x4E2D;&#x627E;&#x5230;VCAP&#xFF08;&#x4E5F;&#x79F0;&#x4E3A;Cloud Foundry&#xFF09;&#x5143;&#x6570;&#x636E;&#x3002;&#x5B83;&#x89E3;&#x6790;&#x51FA;VCAP_APPLICATION&#x548C;VCAP_SERVICES&#x5143;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x5C06;&#x5176;&#x8F6C;&#x6362;&#x6210;&#x6613;&#x4E8E;Environment&#x7528;&#x6237;&#x6D88;&#x8D39;&#x7684;&#x5F62;&#x5F0F;&#x3002;&#x5982;&#x679C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5728;Cloud Foundry&#x4E2D;&#x8FD0;&#x884C;&#xFF0C;&#x5219;&#x8FD9;&#x4E24;&#x4E2A;&#x5143;&#x6570;&#x636E;&#x9879;&#x90FD;&#x662F;&#x4EE5;OS&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7F16;&#x7801;&#x7684;JSON&#x5BF9;&#x8C61;&#x3002;VCAP_APPLICATION&#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x672C;&#x4FE1;&#x606F;&#x7684;&#x6D45;&#x54C8;&#x5E0C;&#xFF08;&#x540D;&#x79F0;&#x3001;&#x5B9E;&#x4F8B;ID&#x3001;&#x5B9E;&#x4F8B;&#x7D22;&#x5F15;&#x7B49;&#xFF09;&#xFF0C;&#x800C;VCAP_SERVICES&#x662F;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x54C8;&#x5E0C;&#xFF0C;&#x5176;&#x4E2D;&#x952E;&#x662F;&#x670D;&#x52A1;&#x6807;&#x7B7E;&#xFF0C;&#x503C;&#x662F;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x5143;&#x6570;&#x636E;&#x7684;&#x54C8;&#x5E0C;&#x5217;&#x8868;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+</blockquote>
+<pre><code class="lang-css">VCAP_APPLICATION: {&quot;instance_id&quot;:&quot;2ce0ac627a6c8e47e936d829a3a47b5b&quot;,&quot;instance_index&quot;:0,
+    &quot;version&quot;:&quot;0138c4a6-2a73-416b-aca0-572c09f7ca53&quot;,&quot;name&quot;:&quot;foo&quot;,
+    &quot;uris&quot;:[&quot;foo.cfapps.io&quot;], ...}
+VCAP_SERVICES: {&quot;rds-mysql-1.0&quot;:[{&quot;name&quot;:&quot;mysql&quot;,&quot;label&quot;:&quot;rds-mysql-1.0&quot;,&quot;plan&quot;:&quot;10mb&quot;,
+    &quot;credentials&quot;:{&quot;name&quot;:&quot;d04fb13d27d964c62b267bbba1cffb9da&quot;,&quot;hostname&quot;:&quot;mysql-service-public.clqg2e2w3ecf.us-east-1.rds.amazonaws.com&quot;,
+    &quot;host&quot;:&quot;mysql-service-public.clqg2e2w3ecf.us-east-1.rds.amazonaws.com&quot;,&quot;port&quot;:3306,&quot;user&quot;:&quot;urpRuqTf8Cpe6&quot;,
+    &quot;username&quot;:&quot;urpRuqTf8Cpe6&quot;,&quot;password&quot;:&quot;pxLsGVpsC9A5S&quot;}
+  }]}
+</code></pre>
+<blockquote>
+<p>&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x88AB;&#x5C55;&#x5F00;&#x6210;&#x5C5E;&#x6027;&#x3002;VCAP_APPLICATION&#x5BF9;&#x8C61;&#x76F4;&#x63A5;&#x8F6C;&#x6362;&#x4E3A;vcap.application.*&#xFF0C;&#x65B9;&#x5F0F;&#x76F8;&#x5F53;&#x660E;&#x663E;&#xFF0C;&#x800C;VCAP_SERVICES&#x5BF9;&#x8C61;&#x5219;&#x88AB;&#x5C55;&#x5F00;&#xFF0C;&#x4F7F;&#x5176;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x54C8;&#x5E0C;&#xFF0C;&#x5176;&#x4E2D;&#x952E;&#x7B49;&#x4E8E;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x540D;&#x79F0;&#xFF08;&#x4F8B;&#x5982;&#x4E0A;&#x9762;&#x7684;&#x793A;&#x4F8B;&#x4E2D;&#x7684;&quot;mysql&quot;&#xFF09;&#xFF0C;&#x503C;&#x7B49;&#x4E8E;&#x8BE5;&#x5B9E;&#x4F8B;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x7136;&#x540E;&#x4EE5;&#x76F8;&#x540C;&#x7684;&#x65B9;&#x5F0F;&#x5C55;&#x5F00;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+</blockquote>
+<pre><code class="lang-makefile">vcap.application.instance_id: 2ce0ac627a6c8e47e936d829a3a47b5b
+vcap.application.version: 0138c4a6-2a73-416b-aca0-572c09f7ca53
+vcap.application.name: foo
+vcap.application.uris[0]: foo.cfapps.io
+
+vcap.services.mysql.name: mysql
+vcap.services.mysql.label: rds-mysql-1.0
+vcap.services.mysql.credentials.name: d04fb13d27d964c62b267bbba1cffb9da
+vcap.services.mysql.credentials.port: 3306
+vcap.services.mysql.credentials.host: mysql-service-public.clqg2e2w3ecf.us-east-1.rds.amazonaws.com
+vcap.services.mysql.credentials.username: urpRuqTf8Cpe6
+vcap.services.mysql.credentials.password: pxLsGVpsC9A5S
+...
+</code></pre>
+<p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x6B64;&#x521D;&#x59CB;&#x5316;&#x7A0B;&#x5E8F;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x4FE1;&#x606F;&#x7528;&#x9014;&#xFF08;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x548C;&#x5B9E;&#x4F8B;ID&#x7279;&#x522B;&#x6709;&#x7528;&#xFF09;&#x3002;&#x5BF9;&#x4E8E;&#x670D;&#x52A1;&#x7ED1;&#x5B9A;&#xFF0C;&#x60A8;&#x53EF;&#x80FD;&#x4F1A;&#x53D1;&#x73B0;Spring Cloud&#x66F4;&#x65B9;&#x4FBF;&#xFF0C;&#x66F4;&#x80FD;&#x62B5;&#x5FA1;Cloud Foundry&#x6F5C;&#x5728;&#x53D8;&#x5316;&#x7684;&#x5F71;&#x54CD;&#x3002;</p>
+<pre><code class="lang-java">    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postProcessEnvironment</span><span class="hljs-params">(ConfigurableEnvironment environment, SpringApplication application)</span> </span>{
+        <span class="hljs-keyword">if</span> (CloudPlatform.CLOUD_FOUNDRY.isActive(environment)) {
+            Properties properties = <span class="hljs-keyword">new</span> Properties();
+            JsonParser jsonParser = JsonParserFactory.getJsonParser();
+            addWithPrefix(properties, getPropertiesFromApplication(environment, jsonParser), <span class="hljs-string">&quot;vcap.application.&quot;</span>);
+            addWithPrefix(properties, getPropertiesFromServices(environment, jsonParser), <span class="hljs-string">&quot;vcap.services.&quot;</span>);
+            MutablePropertySources propertySources = environment.getPropertySources();
+            <span class="hljs-keyword">if</span> (propertySources.contains(CommandLinePropertySource.COMMAND_LINE_PROPERTY_SOURCE_NAME)) {
+                propertySources.addAfter(CommandLinePropertySource.COMMAND_LINE_PROPERTY_SOURCE_NAME,
+                        <span class="hljs-keyword">new</span> PropertiesPropertySource(<span class="hljs-string">&quot;vcap&quot;</span>, properties));
+            }
+            <span class="hljs-keyword">else</span> {
+                propertySources.addFirst(<span class="hljs-keyword">new</span> PropertiesPropertySource(<span class="hljs-string">&quot;vcap&quot;</span>, properties));
+            }
+        }
+    }
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SpringApplicationJsonEnvironmentPostProcessor.html" class="navigation navigation-prev " aria-label="Previous page: 5.4SpringApplicationJsonEnvironmentPostProcessor">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ConfigDataEnvironmentPostProcessor.html" class="navigation navigation-next " aria-label="Next page: 5.6ConfigDataEnvironmentPostProcessor">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"5.5CloudFoundryVcapEnvironmentPostProcessor","level":"1.4.5.5","depth":3,"next":{"title":"5.6ConfigDataEnvironmentPostProcessor","level":"1.4.5.6","depth":3,"path":"ch03/ConfigDataEnvironmentPostProcessor.md","ref":"ch03/ConfigDataEnvironmentPostProcessor.md","articles":[]},"previous":{"title":"5.4SpringApplicationJsonEnvironmentPostProcessor","level":"1.4.5.4","depth":3,"path":"ch03/SpringApplicationJsonEnvironmentPostProcessor.md","ref":"ch03/SpringApplicationJsonEnvironmentPostProcessor.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch03/CloudFoundryVcapEnvironmentPostProcessor.md","mtime":"2024-03-30T03:44:25.814Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-30T09:34:47.379Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

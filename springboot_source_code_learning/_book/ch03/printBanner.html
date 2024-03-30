@@ -1,0 +1,667 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>7.打印Banner · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../ch04/run.html" />
+    
+    
+    <link rel="prev" href="environmentAfter.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    一、关于SpringApplication
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch01/什么是SpringApplication.html">
+            
+                <a href="../ch01/什么是SpringApplication.html">
+            
+                    
+                    1.什么是SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch01/创建SpringApplication.html">
+            
+                <a href="../ch01/创建SpringApplication.html">
+            
+                    
+                    2.创建SpringApplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch02/run.html">
+            
+                <a href="../ch02/run.html">
+            
+                    
+                    二、启动SpringApplication
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch02/DefaultBootstrapContext.html">
+            
+                <a href="../ch02/DefaultBootstrapContext.html">
+            
+                    
+                    1.创建引导上下文DefaultBootstrapContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch02/systemProperty.html">
+            
+                <a href="../ch02/systemProperty.html">
+            
+                    
+                    2.设置系统属性java.awt.headless
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch02/SpringApplicationRunListeners.html">
+            
+                <a href="../ch02/SpringApplicationRunListeners.html">
+            
+                    
+                    3.获取SpringApplicationRunListeners
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch02/ApplicationStartingEvent.html">
+            
+                <a href="../ch02/ApplicationStartingEvent.html">
+            
+                    
+                    4.事件发布：ApplicationStartingEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="run.html">
+            
+                <a href="run.html">
+            
+                    
+                    三、创建并配置Enviorment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="ApplicationArguments.html">
+            
+                <a href="ApplicationArguments.html">
+            
+                    
+                    1.创建ApplicationArguments
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ApplicationServletEnvironment.html">
+            
+                <a href="ApplicationServletEnvironment.html">
+            
+                    
+                    2.获取或者创建ApplicationServletEnvironment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="configureEnvironment.html">
+            
+                <a href="configureEnvironment.html">
+            
+                    
+                    3.配置ApplicationServletEnvironment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="attachConfigurationProperties.html">
+            
+                <a href="attachConfigurationProperties.html">
+            
+                    
+                    4.附加属性源"configurationProperties"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="ApplicationEnvironmentPreparedEvent.html">
+            
+                <a href="ApplicationEnvironmentPreparedEvent.html">
+            
+                    
+                    5.事件发布：ApplicationEnvironmentPreparedEvent
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="EnvironmentPostProcessorApplicationListener.html">
+            
+                <a href="EnvironmentPostProcessorApplicationListener.html">
+            
+                    
+                    5.1处理EnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="RandomValuePropertySourceEnvironmentPostProcessor.html">
+            
+                <a href="RandomValuePropertySourceEnvironmentPostProcessor.html">
+            
+                    
+                    5.2RandomValuePropertySourceEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.3" data-path="SystemEnvironmentPropertySourceEnvironmentPostProcessor.html">
+            
+                <a href="SystemEnvironmentPropertySourceEnvironmentPostProcessor.html">
+            
+                    
+                    5.3SystemEnvironmentPropertySourceEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.4" data-path="SpringApplicationJsonEnvironmentPostProcessor.html">
+            
+                <a href="SpringApplicationJsonEnvironmentPostProcessor.html">
+            
+                    
+                    5.4SpringApplicationJsonEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.5" data-path="CloudFoundryVcapEnvironmentPostProcessor.html">
+            
+                <a href="CloudFoundryVcapEnvironmentPostProcessor.html">
+            
+                    
+                    5.5CloudFoundryVcapEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.6" data-path="ConfigDataEnvironmentPostProcessor.html">
+            
+                <a href="ConfigDataEnvironmentPostProcessor.html">
+            
+                    
+                    5.6ConfigDataEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.7" data-path="DebugAgentEnvironmentPostProcessor.html">
+            
+                <a href="DebugAgentEnvironmentPostProcessor.html">
+            
+                    
+                    5.7DebugAgentEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.8" data-path="IntegrationPropertiesEnvironmentPostProcessor.html">
+            
+                <a href="IntegrationPropertiesEnvironmentPostProcessor.html">
+            
+                    
+                    5.8IntegrationPropertiesEnvironmentPostProcessor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="environmentAfter.html">
+            
+                <a href="environmentAfter.html">
+            
+                    
+                    6.Environment后续处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.7" data-path="printBanner.html">
+            
+                <a href="printBanner.html">
+            
+                    
+                    7.打印Banner
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch04/run.html">
+            
+                <a href="../ch04/run.html">
+            
+                    
+                    四、准备ApplicationContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    五、接口详解
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../interface/BootstrapRegistryInitializer.html">
+            
+                <a href="../interface/BootstrapRegistryInitializer.html">
+            
+                    
+                    1.BootstrapRegistryInitializer接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../interface/BootstrapContext.html">
+            
+                <a href="../interface/BootstrapContext.html">
+            
+                    
+                    2.BootstrapContext接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../interface/BootstrapRegistry.md">
+            
+                <span>
+            
+                    
+                    3.BootstrapRegistry接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../interface/EnvironmentPostProcessor.html">
+            
+                <a href="../interface/EnvironmentPostProcessor.html">
+            
+                    
+                    4.EnvironmentPostProcessor接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >7.打印Banner</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x6253;&#x5370;-banner&#x56FE;">&#x6253;&#x5370; Banner&#x56FE;</h1>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">private</span> Banner <span class="hljs-title">printBanner</span><span class="hljs-params">(ConfigurableEnvironment environment)</span> </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.bannerMode == Banner.Mode.OFF) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        }
+        ResourceLoader resourceLoader = (<span class="hljs-keyword">this</span>.resourceLoader != <span class="hljs-keyword">null</span>) ? <span class="hljs-keyword">this</span>.resourceLoader
+                : <span class="hljs-keyword">new</span> DefaultResourceLoader(<span class="hljs-keyword">null</span>);
+        SpringApplicationBannerPrinter bannerPrinter = <span class="hljs-keyword">new</span> SpringApplicationBannerPrinter(resourceLoader, <span class="hljs-keyword">this</span>.banner);
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.bannerMode == Mode.LOG) {
+            <span class="hljs-keyword">return</span> bannerPrinter.print(environment, <span class="hljs-keyword">this</span>.mainApplicationClass, logger);
+        }
+        <span class="hljs-keyword">return</span> bannerPrinter.print(environment, <span class="hljs-keyword">this</span>.mainApplicationClass, System.out);
+    }
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="environmentAfter.html" class="navigation navigation-prev " aria-label="Previous page: 6.Environment后续处理">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../ch04/run.html" class="navigation navigation-next " aria-label="Next page: 四、准备ApplicationContext">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"7.打印Banner","level":"1.4.7","depth":2,"next":{"title":"四、准备ApplicationContext","level":"1.5","depth":1,"path":"ch04/run.md","ref":"ch04/run.md","articles":[]},"previous":{"title":"6.Environment后续处理","level":"1.4.6","depth":2,"path":"ch03/environmentAfter.md","ref":"ch03/environmentAfter.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch03/printBanner.md","mtime":"2024-03-30T08:45:26.506Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-03-30T09:34:47.379Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

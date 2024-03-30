@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](README.md)
+* [前言](README.md)
 * 一、关于SpringApplication
     * [1.什么是SpringApplication](ch01/什么是SpringApplication.md)
     * [2.创建SpringApplication](ch01/创建SpringApplication.md)
@@ -17,7 +17,16 @@
     * [5.事件发布：ApplicationEnvironmentPreparedEvent](ch03/ApplicationEnvironmentPreparedEvent.md)
         * [5.1处理EnvironmentPostProcessor](ch03/EnvironmentPostProcessorApplicationListener.md)
         * [5.2RandomValuePropertySourceEnvironmentPostProcessor](ch03/RandomValuePropertySourceEnvironmentPostProcessor.md)
-* 四、接口详解
+        * [5.3SystemEnvironmentPropertySourceEnvironmentPostProcessor](ch03/SystemEnvironmentPropertySourceEnvironmentPostProcessor.md)
+        * [5.4SpringApplicationJsonEnvironmentPostProcessor](ch03/SpringApplicationJsonEnvironmentPostProcessor.md)
+        * [5.5CloudFoundryVcapEnvironmentPostProcessor](ch03/CloudFoundryVcapEnvironmentPostProcessor.md)
+        * [**<font color=red>5.6ConfigDataEnvironmentPostProcessor</font>**](ch03/ConfigDataEnvironmentPostProcessor.md)
+        * [5.7DebugAgentEnvironmentPostProcessor](ch03/DebugAgentEnvironmentPostProcessor.md)
+        * [5.8IntegrationPropertiesEnvironmentPostProcessor](ch03/IntegrationPropertiesEnvironmentPostProcessor.md)
+    * [6.Environment后续处理](ch03/environmentAfter.md)
+    * [7.打印Banner](ch03/printBanner.md)
+* [四、准备ApplicationContext](ch04/run.md)
+* 五、接口详解
     * [1.BootstrapRegistryInitializer接口详解](interface/BootstrapRegistryInitializer.md)
     * [2.BootstrapContext接口详解](interface/BootstrapContext.md)
     * [3.BootstrapRegistry接口详解](interface/BootstrapRegistry.md)

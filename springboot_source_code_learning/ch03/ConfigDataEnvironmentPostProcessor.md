@@ -193,13 +193,98 @@ org.springframework.boot.context.config.StandardConfigDataLoader
 			List<ConfigDataLocation> locations) {
 		try {
 			Profiles profiles = (activationContext != null) ? activationContext.getProfiles() : null;
-			//YamlPropertySourceLoader、PropertiesPropertySourceLoader getFileExtensions方法推断出可以加载DEFAULT_SEARCH_LOCATIONS路径下的哪些配置文件，最终筛选出实际存在的配置文件
+			//YamlPropertySourceLoader、PropertiesPropertySourceLoader getFileExtensions方法
+			//推断出可以加载DEFAULT_SEARCH_LOCATIONS路径下的哪些配置文件，最终筛选出实际存在的配置文件
 			List<ConfigDataResolutionResult> resolved = resolve(locationResolverContext, profiles, locations);
-			//最终解析配置文件,将数据源OriginTrackedMapPropertySource添加到环境PropertySource中
+			//使用合适的ConfigDataLoader解析配置文件，得到ConfigData
 			return load(loaderContext, resolved);
 		}
 		catch (IOException ex) {
 			throw new IllegalStateException("IO error on loading imports from " + locations, ex);
 		}
+	}
+```
+ 使用一个合适的ConfigDataLoader(StandardConfigDataLoader)加载ConfigData
+ ```java
+ 	<R extends ConfigDataResource> ConfigData load(ConfigDataLoaderContext context, R resource) throws IOException {
+      //获取合适的ConfigDataLoader
+		ConfigDataLoader<R> loader = getLoader(context, resource);
+		this.logger.trace(LogMessage.of(() -> "Loading " + resource + " using loader " + loader.getClass().getName()));
+		return loader.load(context, resource);
+	}
+```
+加载给定资源，根据配置文件类型，使用对应的属性资源加载器进行加载，获取属性资源PropertySource
+```java
+@Override
+	public ConfigData load(ConfigDataLoaderContext context, StandardConfigDataResource resource)
+			throws IOException, ConfigDataNotFoundException {
+		if (resource.isEmptyDirectory()) {
+			return ConfigData.EMPTY;
+		}
+		ConfigDataResourceNotFoundException.throwIfDoesNotExist(resource, resource.getResource());
+		StandardConfigDataReference reference = resource.getReference();
+		Resource originTrackedResource = OriginTrackedResource.of(resource.getResource(),
+				Origin.from(reference.getConfigDataLocation()));
+		String name = String.format("Config resource '%s' via location '%s'", resource,
+				reference.getConfigDataLocation());
+		List<PropertySource<?>> propertySources = reference.getPropertySourceLoader().load(name, originTrackedResource);
+		PropertySourceOptions options = (resource.getProfile() != null) ? PROFILE_SPECIFIC : NON_PROFILE_SPECIFIC;
+		return new ConfigData(propertySources, options);
+	}
+```
+org.springframework.boot.env.YamlPropertySourceLoader#load
+```java
+	@Override
+	public List<PropertySource<?>> load(String name, Resource resource) throws IOException {
+		if (!ClassUtils.isPresent("org.yaml.snakeyaml.Yaml", getClass().getClassLoader())) {
+			throw new IllegalStateException(
+					"Attempted to load " + name + " but snakeyaml was not found on the classpath");
+		}
+		List<Map<String, Object>> loaded = new OriginTrackedYamlLoader(resource).load();
+		if (loaded.isEmpty()) {
+			return Collections.emptyList();
+		}
+		List<PropertySource<?>> propertySources = new ArrayList<>(loaded.size());
+		for (int i = 0; i < loaded.size(); i++) {
+			String documentNumber = (loaded.size() != 1) ? " (document #" + i + ")" : "";
+			propertySources.add(new OriginTrackedMapPropertySource(name + documentNumber,
+					Collections.unmodifiableMap(loaded.get(i)), true));
+		}
+		return propertySources;
+	}
+```
+org.springframework.boot.env.PropertiesPropertySourceLoader#load
+```java
+	@Override
+	public List<PropertySource<?>> load(String name, Resource resource) throws IOException {
+		List<Map<String, ?>> properties = loadProperties(resource);
+		if (properties.isEmpty()) {
+			return Collections.emptyList();
+		}
+		List<PropertySource<?>> propertySources = new ArrayList<>(properties.size());
+		for (int i = 0; i < properties.size(); i++) {
+			String documentNumber = (properties.size() != 1) ? " (document #" + i + ")" : "";
+			propertySources.add(new OriginTrackedMapPropertySource(name + documentNumber,
+					Collections.unmodifiableMap(properties.get(i)), true));
+		}
+		return propertySources;
+	}
+```
+最终解析配置文件,将数据源OriginTrackedMapPropertySource添加到环境PropertySource中
+```java
+	private void applyToEnvironment(ConfigDataEnvironmentContributors contributors,
+			ConfigDataActivationContext activationContext, Set<ConfigDataLocation> loadedLocations,
+			Set<ConfigDataLocation> optionalLocations) {
+		checkForInvalidProperties(contributors);
+		checkMandatoryLocations(contributors, activationContext, loadedLocations, optionalLocations);
+		MutablePropertySources propertySources = this.environment.getPropertySources();
+		applyContributor(contributors, activationContext, propertySources);
+		DefaultPropertiesPropertySource.moveToEnd(propertySources);
+		Profiles profiles = activationContext.getProfiles();
+		this.logger.trace(LogMessage.format("Setting default profiles: %s", profiles.getDefault()));
+		this.environment.setDefaultProfiles(StringUtils.toStringArray(profiles.getDefault()));
+		this.logger.trace(LogMessage.format("Setting active profiles: %s", profiles.getActive()));
+		this.environment.setActiveProfiles(StringUtils.toStringArray(profiles.getActive()));
+		this.environmentUpdateListener.onSetProfiles(profiles);
 	}
 ```

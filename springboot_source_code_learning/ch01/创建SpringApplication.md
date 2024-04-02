@@ -43,11 +43,32 @@ public SpringApplication(ResourceLoader resourceLoader,
 				getSpringFactoriesInstances(BootstrapRegistryInitializer.class));
     ```
 5. 从spring.factories中获取ApplicationContextInitializer（在应用程序上下文初始化之前执行一些自定义逻辑）
+    ```
+    # Application Context Initializers
+    org.springframework.context.ApplicationContextInitializer=\
+    org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer,\
+    org.springframework.boot.context.ContextIdApplicationContextInitializer,\
+    org.springframework.boot.context.config.DelegatingApplicationContextInitializer,\
+    org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer,\
+    org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer
+    ```
     ```java
     setInitializers((Collection)
         getSpringFactoriesInstances(ApplicationContextInitializer.class));
     ```
 6. 从spring.factories中获取ApplicationListener
+    ```
+    # Application Listeners
+    org.springframework.context.ApplicationListener=\
+    org.springframework.boot.ClearCachesApplicationListener,\
+    org.springframework.boot.builder.ParentContextCloserApplicationListener,\
+    org.springframework.boot.context.FileEncodingApplicationListener,\
+    org.springframework.boot.context.config.AnsiOutputApplicationListener,\
+    org.springframework.boot.context.config.DelegatingApplicationListener,\
+    org.springframework.boot.context.logging.LoggingApplicationListener,\
+    org.springframework.boot.env.EnvironmentPostProcessorApplicationListener,\
+    org.springframework.boot.autoconfigure.BackgroundPreinitializer
+    ```
     ```java
     setListeners((Collection)
         getSpringFactoriesInstances(ApplicationListener.class));

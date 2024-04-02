@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="ConfigurableApplicationContext.html" />
+    
     
     <link rel="prev" href="../ch03/printBanner.html" />
     
@@ -447,6 +449,148 @@
             
 
             
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="ConfigurableApplicationContext.html">
+            
+                <a href="ConfigurableApplicationContext.html">
+            
+                    
+                    1.创建ConfigurableApplicationContext
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="resourcePatternResolver.html">
+            
+                <a href="resourcePatternResolver.html">
+            
+                    
+                    1.1初始化resourcePatternResolver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="beanFactory.html">
+            
+                <a href="beanFactory.html">
+            
+                    
+                    1.2初始化beanFactory
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="reader.html">
+            
+                <a href="reader.html">
+            
+                    
+                    1.3初始化reader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="scanner.html">
+            
+                <a href="scanner.html">
+            
+                    
+                    1.4初始化scanner
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="setApplicationStartup.html">
+            
+                <a href="setApplicationStartup.html">
+            
+                    
+                    2.配置ApplicationStartup
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="setEnvironment.html">
+            
+                <a href="setEnvironment.html">
+            
+                    
+                    3.配置Environment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="postProcessApplicationContext.html">
+            
+                <a href="postProcessApplicationContext.html">
+            
+                    
+                    4.ApplicationContext应用相关的后处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="applyApplicationContextInitializers.html">
+            
+                <a href="applyApplicationContextInitializers.html">
+            
+                    
+                    5.应用ApplicationContextInitializers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="ApplicationContextInitializedEvent.html">
+            
+                <a href="ApplicationContextInitializedEvent.html">
+            
+                    
+                    6.事件发布：ApplicationContextInitializedEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
         </li>
     
         <li class="chapter " data-level="1.6" >
@@ -568,6 +712,7 @@
                                 <h1 id="&#x51C6;&#x5907;&#x5E94;&#x7528;&#x4E0A;&#x4E0B;&#x6587;applicationcontext">&#x51C6;&#x5907;&#x5E94;&#x7528;&#x4E0A;&#x4E0B;&#x6587;ApplicationContext</h1>
 <pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> ConfigurableApplicationContext <span class="hljs-title">run</span><span class="hljs-params">(String... args)</span> </span>{
         ...
+        <span class="hljs-comment">//&#x521B;&#x5EFA;&#x5E94;&#x7528;&#x4E0A;&#x4E0B;&#x6587; AnnotationConfigServletWebServerApplicationContext</span>
         ConfigurableApplicationContext context = createApplicationContext();
         context.setApplicationStartup(<span class="hljs-keyword">this</span>.applicationStartup);
         prepareContext(bootstrapContext, context, environment, listeners, applicationArguments, printedBanner);
@@ -601,10 +746,14 @@
 
             
                 
-                <a href="../ch03/printBanner.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 7.打印Banner">
+                <a href="../ch03/printBanner.html" class="navigation navigation-prev " aria-label="Previous page: 7.打印Banner">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="ConfigurableApplicationContext.html" class="navigation navigation-next " aria-label="Next page: 1.创建ConfigurableApplicationContext">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -613,7 +762,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"四、准备ApplicationContext","level":"1.5","depth":1,"next":{"title":"五、接口详解","level":"1.6","depth":1,"ref":"","articles":[{"title":"1.BootstrapRegistryInitializer接口详解","level":"1.6.1","depth":2,"path":"interface/BootstrapRegistryInitializer.md","ref":"interface/BootstrapRegistryInitializer.md","articles":[]},{"title":"2.BootstrapContext接口详解","level":"1.6.2","depth":2,"path":"interface/BootstrapContext.md","ref":"interface/BootstrapContext.md","articles":[]},{"title":"3.BootstrapRegistry接口详解","level":"1.6.3","depth":2,"path":"interface/BootstrapRegistry.md","ref":"interface/BootstrapRegistry.md","articles":[]},{"title":"4.EnvironmentPostProcessor接口详解","level":"1.6.4","depth":2,"path":"interface/EnvironmentPostProcessor.md","ref":"interface/EnvironmentPostProcessor.md","articles":[]}]},"previous":{"title":"7.打印Banner","level":"1.4.7","depth":2,"path":"ch03/printBanner.md","ref":"ch03/printBanner.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch04/run.md","mtime":"2024-03-30T08:48:18.193Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-04-01T02:39:07.748Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"四、准备ApplicationContext","level":"1.5","depth":1,"next":{"title":"1.创建ConfigurableApplicationContext","level":"1.5.1","depth":2,"path":"ch04/ConfigurableApplicationContext.md","ref":"ch04/ConfigurableApplicationContext.md","articles":[{"title":"1.1初始化resourcePatternResolver","level":"1.5.1.1","depth":3,"path":"ch04/resourcePatternResolver.md","ref":"ch04/resourcePatternResolver.md","articles":[]},{"title":"1.2初始化beanFactory","level":"1.5.1.2","depth":3,"path":"ch04/beanFactory.md","ref":"ch04/beanFactory.md","articles":[]},{"title":"1.3初始化reader","level":"1.5.1.3","depth":3,"path":"ch04/reader.md","ref":"ch04/reader.md","articles":[]},{"title":"1.4初始化scanner","level":"1.5.1.4","depth":3,"path":"ch04/scanner.md","ref":"ch04/scanner.md","articles":[]}]},"previous":{"title":"7.打印Banner","level":"1.4.7","depth":2,"path":"ch03/printBanner.md","ref":"ch03/printBanner.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch04/run.md","mtime":"2024-04-02T06:14:57.410Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-04-02T09:43:06.798Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

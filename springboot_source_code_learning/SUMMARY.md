@@ -38,7 +38,8 @@
     * [6.事件发布：ApplicationContextInitializedEvent](ch04/ApplicationContextInitializedEvent.md)
     * [7.事件发布：BootstrapContextClosedEvent](ch04/BootstrapContextClosedEvent.md)
     * [8.添加特定的单例bean](ch04/addBootSpecificSingletonBeans.md)
-    * [8.加载bean到ApplicationContext](ch04/loadBean.md)
+    * [9.加载beanDefinition](ch04/loadBean.md)
+    * [10.事件发布：ApplicationPreparedEvent](ch04/ApplicationPreparedEvent.md)
 * 五、接口详解
     * [1.BootstrapRegistryInitializer接口详解](interface/BootstrapRegistryInitializer.md)
     * [2.BootstrapContext接口详解](interface/BootstrapContext.md)

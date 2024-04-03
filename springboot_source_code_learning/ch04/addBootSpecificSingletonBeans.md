@@ -1,4 +1,4 @@
-# 添加引导特定的单里bean
+# 添加引导特定的单例bean
 
 ```java
         // Add boot specific singleton beans

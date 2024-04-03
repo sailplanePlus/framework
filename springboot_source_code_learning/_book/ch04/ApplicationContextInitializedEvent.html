@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="BootstrapContextClosedEvent.html" />
+    
     
     <link rel="prev" href="applyApplicationContextInitializers.html" />
     
@@ -586,6 +588,45 @@
             
         </li>
     
+        <li class="chapter " data-level="1.5.7" data-path="BootstrapContextClosedEvent.html">
+            
+                <a href="BootstrapContextClosedEvent.html">
+            
+                    
+                    7.事件发布：BootstrapContextClosedEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="addBootSpecificSingletonBeans.html">
+            
+                <a href="addBootSpecificSingletonBeans.html">
+            
+                    
+                    8.添加特定的单例bean
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="loadBean.html">
+            
+                <a href="loadBean.html">
+            
+                    
+                    9.加载bean到ApplicationContext
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -710,8 +751,86 @@
                                 <h1 id="&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#xFF1A;applicationcontextinitializedevent">&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#xFF1A;ApplicationContextInitializedEvent</h1>
 <h3 id="&#x5B98;&#x65B9;&#x89E3;&#x8BFB;&#xFF1A;">&#x5B98;&#x65B9;&#x89E3;&#x8BFB;&#xFF1A;</h3>
 <blockquote>
-<p>&#x5728;SpringApplication</p>
+<p>&#x5728;SpringApplication&#x542F;&#x52A8;&#x5E76;&#x4E14;ApplicationContext&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#x3001;ApplicationContextInitializers&#x88AB;&#x8C03;&#x7528;&#x4E4B;&#x540E;&#xFF0C;&#x4F46;&#x5728;&#x52A0;&#x8F7D;&#x4EFB;&#x4F55;bean&#x5B9A;&#x4E49;&#x4E4B;&#x524D;&#x53D1;&#x5E03;&#x7684;&#x4E8B;&#x4EF6;&#x3002;</p>
 </blockquote>
+<ol>
+<li>&#x8C03;&#x7528;org.springframework.boot.SpringApplicationRunListeners#contextPrepared<pre><code class="lang-java"> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contextPrepared</span><span class="hljs-params">(ConfigurableApplicationContext context)</span> </span>{
+     doWithListeners(<span class="hljs-string">&quot;spring.boot.application.context-prepared&quot;</span>, (listener) -&gt; listener.contextPrepared(context));
+ }
+</code></pre>
+</li>
+<li>&#x904D;&#x5386;SpringApplicationRunListener&#x96C6;&#x5408;&#xFF0C;&#x6267;&#x884C;contextPrepared&#x65B9;&#x6CD5;<pre><code class="lang-java"> <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doWithListeners</span><span class="hljs-params">(String stepName, Consumer&lt;SpringApplicationRunListener&gt; listenerAction,
+         Consumer&lt;StartupStep&gt; stepAction)</span> </span>{
+     StartupStep step = <span class="hljs-keyword">this</span>.applicationStartup.start(stepName);
+     <span class="hljs-keyword">this</span>.listeners.forEach(listenerAction);
+     <span class="hljs-keyword">if</span> (stepAction != <span class="hljs-keyword">null</span>) {
+         stepAction.accept(step);
+     }
+     step.end();
+ }
+</code></pre>
+</li>
+<li>&#x8C03;&#x7528;org.springframework.boot.context.event.EventPublishingRunListener#contextPrepared<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">contextPrepared</span><span class="hljs-params">(ConfigurableApplicationContext context)</span> </span>{
+     <span class="hljs-keyword">this</span>.initialMulticaster
+             .multicastEvent(<span class="hljs-keyword">new</span> ApplicationContextInitializedEvent(<span class="hljs-keyword">this</span>.application, <span class="hljs-keyword">this</span>.args, context));
+ }
+</code></pre>
+</li>
+<li><p>&#x4E8B;&#x4EF6;&#x591A;&#x64AD;&#x5668;SimpleApplicationEventMulticaster&#x53D1;&#x5E03;ApplicationContextInitializedEvent&#x4E8B;&#x4EF6;</p>
+<pre><code class="lang-java"> <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">multicastEvent</span><span class="hljs-params">(ApplicationEvent event)</span> </span>{
+     multicastEvent(event, resolveDefaultEventType(event));
+ }
+
+ <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">multicastEvent</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ApplicationEvent event, @Nullable ResolvableType eventType)</span> </span>{
+     ResolvableType type = (eventType != <span class="hljs-keyword">null</span> ? eventType : resolveDefaultEventType(event));
+     Executor executor = getTaskExecutor();
+     <span class="hljs-keyword">for</span> (ApplicationListener&lt;?&gt; listener : getApplicationListeners(event, type)) {
+         <span class="hljs-keyword">if</span> (executor != <span class="hljs-keyword">null</span>) {
+             executor.execute(() -&gt; invokeListener(listener, event));
+         }
+         <span class="hljs-keyword">else</span> {
+             invokeListener(listener, event);
+         }
+     }
+ }
+</code></pre>
+</li>
+<li>&#x83B7;&#x53D6;&#x4E0E;ApplicationContextInitializedEvent&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;ApplicationListener&#x76D1;&#x542C;&#x5668;&#x96C6;&#x5408;&#x3002;&#x56DE;&#x8C03;org.springframework.context.ApplicationListener#onApplicationEvent&#x65B9;&#x6CD5;<pre><code class="lang-java"> <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doInvokeListener</span><span class="hljs-params">(ApplicationListener listener, ApplicationEvent event)</span> </span>{
+     <span class="hljs-keyword">try</span> {
+         listener.onApplicationEvent(event);
+     }
+     <span class="hljs-keyword">catch</span> (ClassCastException ex) {
+         String msg = ex.getMessage();
+         <span class="hljs-keyword">if</span> (msg == <span class="hljs-keyword">null</span> || matchesClassCastMessage(msg, event.getClass()) ||
+                 (event <span class="hljs-keyword">instanceof</span> PayloadApplicationEvent &amp;&amp;
+                         matchesClassCastMessage(msg, ((PayloadApplicationEvent) event).getPayload().getClass()))) {
+             <span class="hljs-comment">// Possibly a lambda-defined listener which we could not resolve the generic event type for</span>
+             <span class="hljs-comment">// -&gt; let&apos;s suppress the exception.</span>
+             Log loggerToUse = <span class="hljs-keyword">this</span>.lazyLogger;
+             <span class="hljs-keyword">if</span> (loggerToUse == <span class="hljs-keyword">null</span>) {
+                 loggerToUse = LogFactory.getLog(getClass());
+                 <span class="hljs-keyword">this</span>.lazyLogger = loggerToUse;
+             }
+             <span class="hljs-keyword">if</span> (loggerToUse.isTraceEnabled()) {
+                 loggerToUse.trace(<span class="hljs-string">&quot;Non-matching event type for listener: &quot;</span> + listener, ex);
+             }
+         }
+         <span class="hljs-keyword">else</span> {
+             <span class="hljs-keyword">throw</span> ex;
+         }
+     }
+ }
+</code></pre>
+</li>
+</ol>
+<h3 id="applicationcontextinitializedevent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;applicationlistener">ApplicationContextInitializedEvent&#x4E8B;&#x4EF6;&#x5177;&#x4F53;&#x56DE;&#x8C03;&#x7684;ApplicationListener</h3>
+<ol>
+<li>BackgroundPreinitializer &#x5565;&#x90FD;&#x6CA1;&#x505A;</li>
+<li>DelegatingApplicationListener &#x5565;&#x90FD;&#x6CA1;&#x505A;</li>
+</ol>
 
                                 
                                 </section>
@@ -739,10 +858,14 @@
 
             
                 
-                <a href="applyApplicationContextInitializers.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 5.应用ApplicationContextInitializers">
+                <a href="applyApplicationContextInitializers.html" class="navigation navigation-prev " aria-label="Previous page: 5.应用ApplicationContextInitializers">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="BootstrapContextClosedEvent.html" class="navigation navigation-next " aria-label="Next page: 7.事件发布：BootstrapContextClosedEvent">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -751,7 +874,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"6.事件发布：ApplicationContextInitializedEvent","level":"1.5.6","depth":2,"next":{"title":"五、接口详解","level":"1.6","depth":1,"ref":"","articles":[{"title":"1.BootstrapRegistryInitializer接口详解","level":"1.6.1","depth":2,"path":"interface/BootstrapRegistryInitializer.md","ref":"interface/BootstrapRegistryInitializer.md","articles":[]},{"title":"2.BootstrapContext接口详解","level":"1.6.2","depth":2,"path":"interface/BootstrapContext.md","ref":"interface/BootstrapContext.md","articles":[]},{"title":"3.BootstrapRegistry接口详解","level":"1.6.3","depth":2,"path":"interface/BootstrapRegistry.md","ref":"interface/BootstrapRegistry.md","articles":[]},{"title":"4.EnvironmentPostProcessor接口详解","level":"1.6.4","depth":2,"path":"interface/EnvironmentPostProcessor.md","ref":"interface/EnvironmentPostProcessor.md","articles":[]}]},"previous":{"title":"5.应用ApplicationContextInitializers","level":"1.5.5","depth":2,"path":"ch04/applyApplicationContextInitializers.md","ref":"ch04/applyApplicationContextInitializers.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch04/ApplicationContextInitializedEvent.md","mtime":"2024-04-02T09:43:03.795Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-04-02T09:43:06.798Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"6.事件发布：ApplicationContextInitializedEvent","level":"1.5.6","depth":2,"next":{"title":"7.事件发布：BootstrapContextClosedEvent","level":"1.5.7","depth":2,"path":"ch04/BootstrapContextClosedEvent.md","ref":"ch04/BootstrapContextClosedEvent.md","articles":[]},"previous":{"title":"5.应用ApplicationContextInitializers","level":"1.5.5","depth":2,"path":"ch04/applyApplicationContextInitializers.md","ref":"ch04/applyApplicationContextInitializers.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch04/ApplicationContextInitializedEvent.md","mtime":"2024-04-02T10:01:47.903Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-04-03T05:58:54.282Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

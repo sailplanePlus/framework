@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>9.加载bean到ApplicationContext · GitBook</title>
+        <title>9.SpringApplication.load · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -56,6 +56,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
+    
+    <link rel="next" href="ApplicationPreparedEvent.html" />
     
     
     <link rel="prev" href="addBootSpecificSingletonBeans.html" />
@@ -617,7 +619,20 @@
                 <a href="loadBean.html">
             
                     
-                    9.加载bean到ApplicationContext
+                    9.SpringApplication.load
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="ApplicationPreparedEvent.html">
+            
+                <a href="ApplicationPreparedEvent.html">
+            
+                    
+                    10.事件发布：ApplicationPreparedEvent
             
                 </a>
             
@@ -630,12 +645,109 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" >
+        <li class="chapter " data-level="1.6" data-path="../ch05/refresh.html">
+            
+                <a href="../ch05/refresh.html">
+            
+                    
+                    五、刷新应用上下文refreshContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch06/run.html">
+            
+                <a href="../ch06/run.html">
+            
+                    
+                    六、完成刷新后续操作
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../ch06/afterRefresh.html">
+            
+                <a href="../ch06/afterRefresh.html">
+            
+                    
+                    1.调用afterRefresh方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../ch06/ApplicationStartedEvent.html">
+            
+                <a href="../ch06/ApplicationStartedEvent.html">
+            
+                    
+                    2.事件发布：ApplicationStartedEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../ch06/AvailabilityChangeEvent.html">
+            
+                <a href="../ch06/AvailabilityChangeEvent.html">
+            
+                    
+                    3.事件发布：AvailabilityChangeEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../ch06/callRunner.html">
+            
+                <a href="../ch06/callRunner.html">
+            
+                    
+                    4.回调ApplicationRunner
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../ch06/ApplicationReadyEvent.html">
+            
+                <a href="../ch06/ApplicationReadyEvent.html">
+            
+                    
+                    5.事件发布：ApplicationReadyEvent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
             
                 <span>
             
                     
-                    五、接口详解
+                    七、接口详解
             
                 </span>
             
@@ -644,7 +756,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../interface/BootstrapRegistryInitializer.html">
+        <li class="chapter " data-level="1.8.1" data-path="../interface/BootstrapRegistryInitializer.html">
             
                 <a href="../interface/BootstrapRegistryInitializer.html">
             
@@ -657,7 +769,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="../interface/BootstrapContext.html">
+        <li class="chapter " data-level="1.8.2" data-path="../interface/BootstrapContext.html">
             
                 <a href="../interface/BootstrapContext.html">
             
@@ -670,7 +782,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="../interface/BootstrapRegistry.md">
+        <li class="chapter " data-level="1.8.3" data-path="../interface/BootstrapRegistry.md">
             
                 <span>
             
@@ -683,12 +795,25 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.4" data-path="../interface/EnvironmentPostProcessor.html">
+        <li class="chapter " data-level="1.8.4" data-path="../interface/EnvironmentPostProcessor.html">
             
                 <a href="../interface/EnvironmentPostProcessor.html">
             
                     
                     4.EnvironmentPostProcessor接口详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../interface/ApplicationRunner.html">
+            
+                <a href="../interface/ApplicationRunner.html">
+            
+                    
+                    5.ApplicationRunner接口详解
             
                 </a>
             
@@ -731,7 +856,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >9.加载bean到ApplicationContext</a>
+        <a href=".." >9.SpringApplication.load</a>
     </h1>
 </div>
 
@@ -748,8 +873,88 @@
                                 
                                 <h1 id="springapplicationload&#x65B9;&#x6CD5;&#xFF0C;&#x52A0;&#x8F7D;bean&#x5230;applicationcontext">SpringApplication.load()&#x65B9;&#x6CD5;&#xFF0C;&#x52A0;&#x8F7D;bean&#x5230;ApplicationContext</h1>
 <p>&#x4E00;&#x3001; &#x52A0;&#x8F7D;&#x6E90;&#x6587;&#x4EF6;</p>
-<pre><code class="lang-java">
+<pre><code class="lang-java">    Set&lt;Object&gt; sources = getAllSources();
 
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Set&lt;Object&gt; <span class="hljs-title">getAllSources</span><span class="hljs-params">()</span> </span>{
+        Set&lt;Object&gt; allSources = <span class="hljs-keyword">new</span> LinkedHashSet&lt;&gt;();
+        <span class="hljs-keyword">if</span> (!CollectionUtils.isEmpty(<span class="hljs-keyword">this</span>.primarySources)) {
+            allSources.addAll(<span class="hljs-keyword">this</span>.primarySources);
+        }
+        <span class="hljs-keyword">if</span> (!CollectionUtils.isEmpty(<span class="hljs-keyword">this</span>.sources)) {
+            allSources.addAll(<span class="hljs-keyword">this</span>.sources);
+        }
+        <span class="hljs-keyword">return</span> Collections.unmodifiableSet(allSources);
+    }
+</code></pre>
+<blockquote>
+<p>&#x5B98;&#x65B9;&#x89E3;&#x8BFB;&#xFF1A;
+SpringApplications&#x53EF;&#x4EE5;&#x4ECE;&#x5404;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x6765;&#x6E90;&#x8BFB;&#x53D6;bean&#x3002;&#x901A;&#x5E38;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;@Configuration&#x7C7B;&#x6765;&#x5F15;&#x5BFC;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x4F46;&#x662F;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x6E90;:
+&#xB7; &#x4F7F;&#x7528;AnnotatedBeanDefinitionReader&#x52A0;&#x8F7D;&#x7684;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7C7B;&#x540D;
+&#xB7; &#x4F7F;&#x7528;XmlBeanDefinitionReader&#x52A0;&#x8F7D;XML&#x8D44;&#x6E90;
+&#xB7; &#x4F7F;&#x7528;GroovyBeanDefinitionReader&#x52A0;&#x8F7D;groovy&#x811A;&#x672C;
+&#xB7; &#x4F7F;&#x7528;ClassPathBeanDefinitionScanner&#x626B;&#x7801;&#x5305;</p>
+</blockquote>
+<p>&#x4E8C;&#x3001;&#x52A0;&#x8F7D;bean</p>
+<pre><code class="lang-java">load(context, sources.toArray(<span class="hljs-keyword">new</span> Object[<span class="hljs-number">0</span>]));
+
+<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">load</span><span class="hljs-params">(ApplicationContext context, Object[] sources)</span> </span>{
+    <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+        logger.debug(<span class="hljs-string">&quot;Loading source &quot;</span> + StringUtils.arrayToCommaDelimitedString(sources));
+    }
+    BeanDefinitionLoader loader = createBeanDefinitionLoader(getBeanDefinitionRegistry(context), sources);
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.beanNameGenerator != <span class="hljs-keyword">null</span>) {
+        loader.setBeanNameGenerator(<span class="hljs-keyword">this</span>.beanNameGenerator);
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.resourceLoader != <span class="hljs-keyword">null</span>) {
+        loader.setResourceLoader(<span class="hljs-keyword">this</span>.resourceLoader);
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.environment != <span class="hljs-keyword">null</span>) {
+        loader.setEnvironment(<span class="hljs-keyword">this</span>.environment);
+    }
+    loader.load();
+}
+</code></pre>
+<p>&#x628A;&#x6E90;&#x52A0;&#x8F7D;&#x5230;reader</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">load</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">for</span> (Object source : <span class="hljs-keyword">this</span>.sources) {
+        load(source);
+    }
+}
+<span class="hljs-comment">//&#x6839;&#x636E;&#x6E90;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x52A0;&#x8F7D;</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">load</span><span class="hljs-params">(Object source)</span> </span>{
+    Assert.notNull(source, <span class="hljs-string">&quot;Source must not be null&quot;</span>);
+    <span class="hljs-keyword">if</span> (source <span class="hljs-keyword">instanceof</span> Class&lt;?&gt;) {
+        load((Class&lt;?&gt;) source);
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (source <span class="hljs-keyword">instanceof</span> Resource) {
+        load((Resource) source);
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (source <span class="hljs-keyword">instanceof</span> Package) {
+        load((Package) source);
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (source <span class="hljs-keyword">instanceof</span> CharSequence) {
+        load((CharSequence) source);
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Invalid source type &quot;</span> + source.getClass());
+}
+</code></pre>
+<p>&#x6CE8;&#x518C;BeanDefinition&#xFF0C;&#x5C06;&#x7C7B;&#x7684;&#x5143;&#x6570;&#x636E;BeanDefinition&#x6CE8;&#x518C;&#x5230;beanDefinitionMap</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">load</span><span class="hljs-params">(Class&lt;?&gt; source)</span> </span>{
+    <span class="hljs-keyword">if</span> (isGroovyPresent() &amp;&amp; GroovyBeanDefinitionSource.class.isAssignableFrom(source)) {
+        <span class="hljs-comment">// Any GroovyLoaders added in beans{} DSL can contribute beans here</span>
+        GroovyBeanDefinitionSource loader = BeanUtils.instantiateClass(source, GroovyBeanDefinitionSource.class);
+        ((GroovyBeanDefinitionReader) <span class="hljs-keyword">this</span>.groovyReader).beans(loader.getBeans());
+    }
+    <span class="hljs-comment">//&#x68C0;&#x67E5;bean&#x662F;&#x5426;&#x7B26;&#x5408;&#x6CE8;&#x518C;&#x6761;&#x4EF6;</span>
+    <span class="hljs-keyword">if</span> (isEligible(source)) {
+       <span class="hljs-comment">//&#x6CE8;&#x518C;BeanDefinition</span>
+        <span class="hljs-keyword">this</span>.annotatedReader.register(source);
+    }
+}
 </code></pre>
 
                                 
@@ -778,10 +983,14 @@
 
             
                 
-                <a href="addBootSpecificSingletonBeans.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 8.添加特定的单例bean">
+                <a href="addBootSpecificSingletonBeans.html" class="navigation navigation-prev " aria-label="Previous page: 8.添加特定的单例bean">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="ApplicationPreparedEvent.html" class="navigation navigation-next " aria-label="Next page: 10.事件发布：ApplicationPreparedEvent">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -790,7 +999,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"9.加载bean到ApplicationContext","level":"1.5.9","depth":2,"next":{"title":"五、接口详解","level":"1.6","depth":1,"ref":"","articles":[{"title":"1.BootstrapRegistryInitializer接口详解","level":"1.6.1","depth":2,"path":"interface/BootstrapRegistryInitializer.md","ref":"interface/BootstrapRegistryInitializer.md","articles":[]},{"title":"2.BootstrapContext接口详解","level":"1.6.2","depth":2,"path":"interface/BootstrapContext.md","ref":"interface/BootstrapContext.md","articles":[]},{"title":"3.BootstrapRegistry接口详解","level":"1.6.3","depth":2,"path":"interface/BootstrapRegistry.md","ref":"interface/BootstrapRegistry.md","articles":[]},{"title":"4.EnvironmentPostProcessor接口详解","level":"1.6.4","depth":2,"path":"interface/EnvironmentPostProcessor.md","ref":"interface/EnvironmentPostProcessor.md","articles":[]}]},"previous":{"title":"8.添加特定的单例bean","level":"1.5.8","depth":2,"path":"ch04/addBootSpecificSingletonBeans.md","ref":"ch04/addBootSpecificSingletonBeans.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch04/loadBean.md","mtime":"2024-04-03T05:43:32.819Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-04-03T05:58:54.282Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"9.SpringApplication.load","level":"1.5.9","depth":2,"next":{"title":"10.事件发布：ApplicationPreparedEvent","level":"1.5.10","depth":2,"path":"ch04/ApplicationPreparedEvent.md","ref":"ch04/ApplicationPreparedEvent.md","articles":[]},"previous":{"title":"8.添加特定的单例bean","level":"1.5.8","depth":2,"path":"ch04/addBootSpecificSingletonBeans.md","ref":"ch04/addBootSpecificSingletonBeans.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch04/loadBean.md","mtime":"2024-04-03T07:40:08.575Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-04-08T07:55:29.183Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
